@@ -1,0 +1,23 @@
+
+// script for creating admins table
+CREATE TABLE admins(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    username varchar(80) NOT null,
+    email varchar(80) NOT null,
+    password varchar(900) NOT null,
+    createdAt datetime NOT null
+);
+
+//script for inserting data into sql
+INSERT INTO admins (username, email, password, createdAt) VALUES ("noni1", "chinomsoamadi7@gmail.com", "$2y$10$wBWRY74oE2mvtTPMuja2keh9UgxqTVkUbvQ3lQFZM8avNzCidUjpa", "2023-7-3 04:53:01");
+
+
+//script for creating admitted student table
+CREATE TABLE admitted_students(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    first_name varchar(80) NOT null,
+    last_name varchar(80) NOT null,
+    middle_name varchar(80) NOT null,
+    reg_no varchar(80) NOT null,
+    sex varchar(80) NOT null
+);
