@@ -8,8 +8,7 @@ $utilities = array();
 
 $utilities["sendResponse"] = function($statusCode, $contentType, $data, $isJson){
     if($isJson){
-        header($contentType);
-        header("Access-Control-Allow-Origin: *");
+        header($contentType); 
         http_response_code($statusCode);
         echo json_encode($data);
     }
