@@ -1,56 +1,23 @@
 <?php
-//$database = require "lib/database.php";
-//$utilities = require "lib/utilities.php";
 
 $adminDashboard = array();
 
-$adminDashboard["getAdminData"] = function(){
+$adminDashboard["getDashboard"] = function(){
     global $utilities;
     global $database;
     
-    //get payload
-    $payload = json_decode(file_get_contents('php://input'), true);
-    
-   try{
-        //validate payload
-        if($utilities["adminLoginValidator"]($payload, array("username", "password"))["isValid"]){
-            //trim data
-            $payload = $utilities["dataTrimmer"]($payload);
+    //get user id from decoded token 
+    $userID = $_SERVER["decodedToken"]->userID;
+    try{
+        //get admin data apart from password
+        $adminData = $database->findOne($database->tables["admins"], "id", 1);
+        //remove the password
+        unset($adminData["password"]);
 
-            //check if admin user exists in database
-            $adminObj = $database->findOne($database->tables["admins"], "username", $payload["username"]);
-            if($adminObj){
-                //check if password matches
-                if(password_verify($payload["password"], $adminObj["password"])){
-
-                    //send token
-
-                    $token = $utilities["jwt_sign"]("admin", $adminObj["id"]);
-                    $responseData["status"] = 200;
-                    $responseData["iuToken"] = $token;
-
-                    $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
-                    return;
-                }
-                else{
-                    $errorObj = array("status"=> 400, "msg"=> "invalid username or password");
-                    $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
-                    return;
-                }
-                
-            }
-            else{
-                $errorObj = array("status"=> 400, "msg"=> "invalid username or password");
-                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
-                return;
-            }
-            
-        }
-        else{
-            $errorObj = array("status"=> 400, "msg"=> $utilities["adminLoginValidator"]($payload, array("username", "password"))["msg"]);
-            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
-            return; 
-        }
+        //send data
+        $responseData = array("status"=> 200, "admin_data"=> $adminData);
+        $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+        return;
 
     }
     catch(Exception $ex){
@@ -58,6 +25,7 @@ $adminDashboard["getAdminData"] = function(){
         $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
         return; 
     }
+
 };
         
 return $adminDashboard;

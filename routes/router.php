@@ -2,6 +2,7 @@
 
 $adminAuth = require ("controllers/adminController/adminAuth.php");
 $adminDashboard = require("controllers/adminController/adminDashboard.php");
+$middlewear = require("lib/middleware.php");
 
 
 $uri = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -18,13 +19,27 @@ switch($path . $method){
         $adminAuth["login"]();
         break;
 
-    case($path == "/admin/login" and $method == "PUT"):
+    case($path == "/admin/get-dashboard" and $method == "GET"):
+        if($middlewear["isTokenValid"]()){
+            if($middlewear["isAdmin"]()){
+                $adminDashboard["getDashboard"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }
+            
+        }
+        else{
+            
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        }
         
-        $adminDashboard["getAdminData"]();
         break;
-
     
     default:
+    http_response_code(404);
     echo "404 no page found";
 
 }

@@ -63,7 +63,7 @@ $utilities["jwt_sign"] = function($account, $id){
         "iss" => "internship_university",
         "accType"=> $account,
         "userID" => $id,
-        "exp" => time() + 10000,
+        "exp" => time() + 18000,
         "iat" => time(),
     ];
     
