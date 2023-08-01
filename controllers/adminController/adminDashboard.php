@@ -10,7 +10,7 @@ $adminDashboard["getDashboard"] = function(){
     $userID = $_SERVER["decodedToken"]->userID;
     try{
         //get admin data apart from password
-        $adminData = $database->findOne($database->tables["admins"], "id", 1);
+        $adminData = $database->findOne($database->tables["admins"], "id", $userID);
         //remove the password
         unset($adminData["password"]);
 
