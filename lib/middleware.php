@@ -5,11 +5,12 @@ $middleware = array();
 $middleware["isTokenValid"] = function(){
     global $utilities;
    // Get the HTTP headers
-    $token = explode(" ", getallheaders()["Authorization"])[1];
     
+    $token = explode(" ", getallheaders()["Authorization"])[1];
     if($token){
         if($utilities["jwt_validate"]($token)){
             $_SERVER["decodedToken"] = $utilities["jwt_validate"]($token);
+            
             return true;
         }
         else{

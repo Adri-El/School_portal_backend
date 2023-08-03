@@ -23,6 +23,7 @@ switch($path . $method){
 
     case($path == "/admin/get-dashboard" and $method == "GET"):
         if($middlewear["isTokenValid"]()){
+        
             if($middlewear["isAdmin"]()){
                 $adminDashboard["getDashboard"]();
             }
