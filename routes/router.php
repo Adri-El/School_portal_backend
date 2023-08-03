@@ -60,5 +60,5 @@ switch($path . $method){
 
 // else{
 //     echo "404 no page found";
-// }
+// }l
 ?>
