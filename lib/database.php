@@ -6,7 +6,8 @@ class Database{
     private $dbName = "internship_university";
     private $db;
     public $tables = array(
-        "admins"=> "admins"
+        "admins"=> "admins",
+        "admitted_students"=> "admitted_students"
     );
 
     public function connect(){

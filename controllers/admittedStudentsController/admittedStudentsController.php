@@ -11,16 +11,21 @@ $admittedStudentsController["getAdmittedStudent"] = function(){
         //extract query string from url
         $reg_no = $_REQUEST["reg_no"];
 
-        echo $reg_no;
-        // //get admitted student data
-        // $admittedStudentData = $database->findOne($database->tables["admitted_students"], "reg_no", );
-        // //remove the password
-        // unset($adminData["password"]);
+        //get admitted student data
+        $admittedStudentData = $database->findOne($database->tables["admitted_students"], "reg_no", $reg_no);
+        if($admittedStudentData){
+            //send data
+            $responseData = array("status"=> 200, "admitted_student_data"=> $admittedStudentData);
+            $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+            return;
 
-        // //send data
-        // $responseData = array("status"=> 200, "admin_data"=> $adminData);
-        // $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
-        // return;
+        }
+        else{
+            $errorObj = array("status"=> 404, "msg"=> "student not found");
+            $utilities["sendResponse"](404, "Content-Type: application/json", $errorObj, true);
+            return;
+        }
+        
 
     }
     catch(Exception $ex){

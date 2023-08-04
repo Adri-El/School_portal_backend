@@ -7,7 +7,7 @@ $middlewear = require("lib/middleware.php");
 
 
 $uri = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$path = $_SERVER["REQUEST_URI"];
+$path = explode('?', $_SERVER["REQUEST_URI"])[0];
 $method = $_SERVER['REQUEST_METHOD'];
 
 
@@ -38,8 +38,7 @@ switch($path . $method){
         } 
     break;
 
-    case($path == "/admitted-student/get-admitted-student" and $method == "GET"):
-                
+    case($path == "/admitted-student/get-admitted-student" and $method == "GET"):       
         $admittedStudentsController["getAdmittedStudent"]();       
     break;
     
