@@ -27,6 +27,48 @@ $adminDashboard["getDashboard"] = function(){
     }
 
 };
+
+
+
+
+$adminDashboard["addStudent"] = function(){
+    global $utilities;
+    global $database;
+
+    try{
+        //get payload
+        $payload = json_decode(file_get_contents('php://input'), true);
+
+        //trim payload
+        $payload = $utilities["dataTrimmer"]($payload);
+
+        //validate payload
+
+        //set reg number
+        $regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
+        $payload["reg_no"] = "".$payload["session"]."/".$regNo["count"]."";
+
+        //update the reg_number_count
+        $updateData = array("count"=> $regNo["count"] + 1);
+        
+        //add to students table
+        $database->updateOne($database->tables["reg_number_count"], $payload, $updateData);
+        
+        
+
+        //send data
+       // $responseData = array("status"=> 200, "admin_data"=> $adminData);
+       // $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+        return;
+
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
         
 return $adminDashboard;
 ?>

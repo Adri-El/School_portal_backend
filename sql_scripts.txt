@@ -19,15 +19,17 @@ CREATE TABLE admitted_students(
     last_name varchar(80) NOT null,
     middle_name varchar(80) NOT null,
     reg_no varchar(80) NOT null,
+    faculty varchar(100) NOT null,
+    department varchar(100) NOT null,
     sex varchar(80) NOT null
 );
 
 //script for inserting admitted admitted_students
-INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, sex) VALUES ("Obiora", "Okoro", "John", "12345678IA", "Male");
-INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, sex) VALUES ("Chiamaka", "Uba", "Sandra", "59632174JC", "Fmale");
-INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, sex) VALUES ("Kunle", "Daramola", "Henry", "85479632PD", "Male");
-INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, sex) VALUES ("Hadiza", "Mustapha", "Ruby", "75315984TY", "Female");
-INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, sex) VALUES ("Steven", "Eno", "David", "56987201JC", "Male");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Obiora", "Okoro", "John", "12345678IA", "Medical science", "Medicine and surgery", "Male");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Chiamaka", "Uba", "Sandra", "59632174JC", "Social science", "Political science", "Fmale");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Kunle", "Daramola", "Henry", "85479632PD", "Physical science", "Computer science", "Male");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Hadiza", "Mustapha", "Ruby", "75315984TY", "Art", "Mass communication", "Female");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Steven", "Eno", "David", "56987201JC", "Engineering", "Civil engineering", "Male");
 
 //script for creating students table
 CREATE TABLE students(
@@ -35,6 +37,7 @@ CREATE TABLE students(
     first_name varchar(80) NOT null,
     last_name varchar(80) NOT null,
     middle_name varchar(80) NOT null,
+    session int(4) NOT null,
     reg_no varchar(80) NOT null,
     faculty varchar(100) NOT null,
     department varchar(100) NOT null,
@@ -46,3 +49,12 @@ CREATE TABLE students(
     guardian_number varchar(80) NOT null,
     sex varchar(80) NOT null
 );
+
+// create reg_number_count table
+CREATE TABLE reg_number_count(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    count int(6) NOT null
+);
+
+// insert number to reg_number_count table
+INSERT INTO reg_number_count (count) VALUES (100000);
