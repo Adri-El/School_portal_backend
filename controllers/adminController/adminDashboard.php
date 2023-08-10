@@ -51,6 +51,9 @@ $adminDashboard["addStudent"] = function(){
         //update the reg_number_count
         $updateData = array("count"=> $regNo["count"] + 1);
         $database->updateOne($database->tables["reg_number_count"], $updateData, "id", $regNo["id"]);
+
+        //hash password
+        $payload["password"] = password_hash($payload["password"], PASSWORD_DEFAULT);
         
         //add to students table
         $database->insertOne($database->tables["students"], $payload, count($payload));
