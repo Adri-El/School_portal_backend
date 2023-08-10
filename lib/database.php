@@ -54,10 +54,39 @@ class Database{
         }
     }
 
-    // public function updateOne($table, $data, $variable_num){
-    //     $stringData = "";
-    //     $sql = "UPDATE $table SET "
-    // }
+    public function updateOne($table, $data, $attribute, $value){
+        $columns = array_keys($data);
+        $values = array_values($data);
+        $stringData = "";
+        $count="count";
+
+        for($i = 0; $i < count($columns); $i++){
+    
+            $stringData .= $columns[$i];
+            $stringData .= "=";
+            $stringData .= $values[$i];
+            if($i == count($columns) -1){
+                continue;
+            }
+            else{
+                $stringData .= ", ";
+            }
+        }
+
+        $sql = "UPDATE $table SET $stringData WHERE $attribute=$value";
+
+        $statement = mysqli_stmt_init($this->db); 
+
+        if(mysqli_stmt_prepare($statement, $sql)){
+           // mysqli_stmt_bind_param($statement, "".implode("", $variables), ...$values);
+            mysqli_stmt_execute($statement);
+
+            return true;
+        }
+        else{
+            return null;
+        }
+    }
 
 }
 

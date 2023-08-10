@@ -40,7 +40,7 @@ $adminDashboard["addStudent"] = function(){
         $payload = json_decode(file_get_contents('php://input'), true);
 
         //trim payload
-        $payload = $utilities["dataTrimmer"]($payload);
+        //$payload = $utilities["dataTrimmer"]($payload);
 
         //validate payload
 
@@ -50,15 +50,14 @@ $adminDashboard["addStudent"] = function(){
 
         //update the reg_number_count
         $updateData = array("count"=> $regNo["count"] + 1);
+        $database->updateOne($database->tables["reg_number_count"], $updateData, "id", $regNo["id"]);
         
         //add to students table
-        $database->updateOne($database->tables["reg_number_count"], $payload, $updateData);
-        
-        
+        $database->insertOne($database->tables["students"], $payload, count($payload));
 
         //send data
-       // $responseData = array("status"=> 200, "admin_data"=> $adminData);
-       // $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+       $responseData = array("status"=> 200, "matric_no"=> $payload["reg_no"]);
+       $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
         return;
 
     }

@@ -14,7 +14,7 @@ $admittedStudentsController["getAdmittedStudent"] = function(){
         //get admitted student data
         $admittedStudentData = $database->findOne($database->tables["admitted_students"], "reg_no", $reg_no);
         if($admittedStudentData){
-            //send data
+            //send data 
             $responseData = array("status"=> 200, "admitted_student_data"=> $admittedStudentData);
             $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
             return;
