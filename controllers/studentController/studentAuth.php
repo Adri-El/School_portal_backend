@@ -12,19 +12,19 @@ $studentAuth["login"] = function(){
     
    try{
         //validate payload
-        if($utilities["adminLoginValidator"]($payload, array("username", "password"))["isValid"]){
+        if($utilities["adminLoginValidator"]($payload, array("reg_no", "password"))["isValid"]){
             //trim data
             $payload = $utilities["dataTrimmer"]($payload);
 
-            //check if admin user exists in database
-            $adminObj = $database->findOne($database->tables["admins"], "username", $payload["username"]);
-            if($adminObj){
+            //check if student exists in database
+            $studentObj = $database->findOne($database->tables["students"], "reg_no", $payload["reg_no"]);
+            if($studentObj){
                 //check if password matches
-                if(password_verify($payload["password"], $adminObj["password"])){
+                if(password_verify($payload["password"], $studentObj["password"])){
 
                     //send token
 
-                    $token = $utilities["jwt_sign"]("admin", $adminObj["id"]);
+                    $token = $utilities["jwt_sign"]("student", $studentObj["id"]);
                     $responseData["status"] = 200;
                     $responseData["iuToken"] = $token;
 
@@ -32,14 +32,14 @@ $studentAuth["login"] = function(){
                     return;
                 }
                 else{
-                    $errorObj = array("status"=> 400, "msg"=> "invalid username or password");
+                    $errorObj = array("status"=> 400, "msg"=> "invalid reg number or password");
                     $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                     return;
                 }
                 
             }
             else{
-                $errorObj = array("status"=> 400, "msg"=> "invalid username or password");
+                $errorObj = array("status"=> 400, "msg"=> "invalid reg number or password");
                 $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                 return;
             }

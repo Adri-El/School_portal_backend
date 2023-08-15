@@ -48,6 +48,20 @@ $adminDashboard["addStudent"] = function(){
         $regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
         $payload["reg_no"] = "".$payload["session"]."/".$regNo["count"]."";
 
+        $duration = $payload["duration"];
+        $sessions = array();
+        $currentSession = 2023;
+        $session = "";
+
+        for($i = 0; $i < $duration; $i++ ){
+            $session .= $currentSession;
+            $session .= "/".++$currentSession."";
+            $sessions["".$session.""] = (int)false;
+            $session="";
+        }
+
+        $payload["sessions"] = serialize($sessions);
+
         //update the reg_number_count
         $updateData = array("count"=> $regNo["count"] + 1);
         $database->updateOne($database->tables["reg_number_count"], $updateData, "id", $regNo["id"]);

@@ -47,6 +47,8 @@ CREATE TABLE students(
     phone_number varchar(200) NOT null,
     guardian_name varchar(150) NOT null,
     guardian_number varchar(80) NOT null,
+    duration int(2) NOT null,
+    sessions varchar(200) NOT null,
     sex varchar(80) NOT null
 );
 

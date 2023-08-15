@@ -24,11 +24,23 @@ $middleware["isTokenValid"] = function(){
 };
 
 $middleware["isAdmin"] = function(){
-    global $utilities;
    // Get account type
     $accType = $_SERVER["decodedToken"]->accType;
     
     if($accType == "admin"){
+        return true;
+    }
+    else{
+        return false;
+    }
+    
+};
+
+$middleware["isStudent"] = function(){
+   // Get account type
+    $accType = $_SERVER["decodedToken"]->accType;
+    
+    if($accType == "student"){
         return true;
     }
     else{
