@@ -56,7 +56,7 @@ $adminDashboard["addStudent"] = function(){
         for($i = 0; $i < $duration; $i++ ){
             $session .= $currentSession;
             $session .= "/".++$currentSession."";
-            $sessions["".$session.""] = 0;
+            $sessions["".$session.""] = (int)false;
             $session="";
         }
 
