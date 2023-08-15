@@ -36,8 +36,11 @@ $studentDashboard["schoolFeesPayment"] = function(){
     //get user id from decoded token 
     $userID = $_SERVER["decodedToken"]->userID;
     try{
+        $payload = json_decode(file_get_contents('php://input'), true);
         
-        return;
+        //validate data
+        
+        
 
     }
     catch(Exception $ex){
