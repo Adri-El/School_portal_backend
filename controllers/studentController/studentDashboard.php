@@ -37,11 +37,19 @@ $studentDashboard["schoolFeesPayment"] = function(){
     $userID = $_SERVER["decodedToken"]->userID;
     try{
         $payload = json_decode(file_get_contents('php://input'), true);
-        
-        //validate data
-        
-        
 
+        //validate data
+
+        //pay schoolfees
+        $updateData = array("school_fees"=> 1);
+        $querry = array("user_id"=> $userID, "session"=> "'".$payload["session"]."'");
+        $database->updateOne($database->tables["sessions"], $updateData, $querry);
+    
+
+        //send data
+        $responseData = array("status"=> 200, "msg"=> "success");
+        $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+        return;
     }
     catch(Exception $ex){
         $errorObj = array("status"=> 500, "msg"=> "server error");

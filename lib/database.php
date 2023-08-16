@@ -9,13 +9,19 @@ class Database{
         "admins"=> "admins",
         "admitted_students"=> "admitted_students",
         "students"=> "students",
-        "reg_number_count"=> "reg_number_count"
+        "reg_number_count"=> "reg_number_count",
+        "sessions"=> "sessions",
+        "courses"=> "courses"
     );
 
     public function connect(){
        $this->db = mysqli_connect($this->dbServerName, $this->dbUsername, $this->dbPassword, $this->dbName) ; 
        return $this->db;
     }
+    public function getDB(){
+        
+        return $this->db;
+     }
 
     public function findOne($table, $attribute, $value){
         $sql = "SELECT * FROM $table WHERE $attribute=?";
@@ -54,11 +60,15 @@ class Database{
         }
     }
 
-    public function updateOne($table, $data, $attribute, $value){
+    //public function updateOne($table, $data, $attribute, $value, $querry){
+    public function updateOne($table, $data, $querry){
         $columns = array_keys($data);
         $values = array_values($data);
         $stringData = "";
         $count="count";
+        $querryKeys = array_keys($querry); 
+        $querryValues = array_values($querry);
+        $querryString= "";
 
         for($i = 0; $i < count($columns); $i++){
     
@@ -73,7 +83,26 @@ class Database{
             }
         }
 
-        $sql = "UPDATE $table SET $stringData WHERE $attribute=$value";
+
+        for($i = 0; $i < count($querryKeys); $i++){
+    
+            $querryString .= $querryKeys[$i];
+            $querryString .= "=";
+            $querryString .= $querryValues[$i];
+            if($i == count($querryKeys) -1){
+                continue;
+            }
+            else{
+                $querryString .= " AND ";
+            }
+        }
+        
+        // $sql = "UPDATE $table SET $stringData WHERE $attribute=$value";
+        //$sql = "UPDATE $table SET $stringData WHERE $querryString";
+        $sql = "UPDATE $table SET $stringData WHERE $querryString";
+        
+        
+    
 
         $statement = mysqli_stmt_init($this->db); 
 

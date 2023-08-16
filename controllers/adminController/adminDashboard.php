@@ -48,6 +48,21 @@ $adminDashboard["addStudent"] = function(){
         $regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
         $payload["reg_no"] = "".$payload["session"]."/".$regNo["count"]."";
 
+        //update the reg_number_count
+        $updateData = array("count"=> $regNo["count"] + 1);
+        $querry = array("id"=> $regNo["id"]);
+        $database->updateOne($database->tables["reg_number_count"], $updateData, $querry);
+
+        //hash password
+        $payload["password"] = password_hash($payload["password"], PASSWORD_DEFAULT);
+        
+        //add to students table
+        $database->insertOne($database->tables["students"], $payload, count($payload));
+
+        //
+        //get student id
+        $studentDetail = $database->findOne($database->tables["students"], "email", $payload["email"]);
+
         $duration = $payload["duration"];
         $sessions = array();
         $currentSession = 2023;
@@ -56,21 +71,11 @@ $adminDashboard["addStudent"] = function(){
         for($i = 0; $i < $duration; $i++ ){
             $session .= $currentSession;
             $session .= "/".++$currentSession."";
-            $sessions["".$session.""] = (int)false;
+            $sessionData = array("user_id"=> $studentDetail["id"], "session"=> $session, "school_fees"=> 0, "course_reg"=> 0);
+            $database->insertOne($database->tables["sessions"], $sessionData, count($sessionData));
+
             $session="";
         }
-
-        $payload["sessions"] = serialize($sessions);
-
-        //update the reg_number_count
-        $updateData = array("count"=> $regNo["count"] + 1);
-        $database->updateOne($database->tables["reg_number_count"], $updateData, "id", $regNo["id"]);
-
-        //hash password
-        $payload["password"] = password_hash($payload["password"], PASSWORD_DEFAULT);
-        
-        //add to students table
-        $database->insertOne($database->tables["students"], $payload, count($payload));
 
         //send data
        $responseData = array("status"=> 200, "matric_no"=> $payload["reg_no"]);
