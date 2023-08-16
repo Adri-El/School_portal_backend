@@ -70,6 +70,92 @@ CREATE TABLE sessions(
 );
 
 
+CREATE TABLE computer_science_year_one_fees(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    academic_hand_book int(7) NOT null,
+    caution_fee int(7) NOT null,
+    course_registration_fee int(7) NOT null,
+    departmental_dues int(7) NOT null,
+    development_fee int(7) NOT null,
+    examination_fee int(7) NOT null,
+    faculty_dues int(7) NOT null,
+    health_insurance_scheme int(7) NOT null,
+    ICT int(7) NOT null,
+    ID_card int(7) NOT null,
+    internet_access_fee int(7) NOT null,
+    lab_fee int(7) NOT null,
+    library_fee int(7) NOT null,
+    orientation_materials int(7) NOT null,
+    registration_fee int(7) NOT null,
+    sports_fee int(7) NOT null,
+    students_welfare_scheme int(7) NOT null,
+    SUG int(7) NOT null,
+    calender int(7) NOT null,
+    visual_library_access int(7) NOT null,
+    TOTAL int(8) NOT null
+
+);
+
+//insert payment value 
+INSERT INTO computer_science_year_one_fees (academic_hand_book, caution_fee, course_registration_fee, departmental_dues, development_fee, examination_fee, faculty_dues, health_insurance_scheme, ICT, ID_card, internet_access_fee, lab_fee, library_fee, orientation_materials, registration_fee, sports_fee, students_welfare_scheme, SUG, calender, visual_library_access, TOTAL) VALUES (3600, 1000, 500, 300, 20000, 5000, 500, 2000, 3700, 500, 12000, 3000, 350, 1000, 700, 1000, 500, 600, 1700, 1000, 71700);
+
+
+//computer science year 2
+CREATE TABLE year_two_fees(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    academic_hand_book int(7) NOT null,
+    caution_fee int(7) NOT null,
+    course_registration_fee int(7) NOT null,
+    departmental_dues int(7) NOT null,
+    development_fee int(7) NOT null,
+    examination_fee int(7) NOT null,
+    faculty_dues int(7) NOT null,
+    health_insurance_scheme int(7) NOT null,
+    ICT int(7) NOT null,
+    ID_card int(7) NOT null,
+    internet_access_fee int(7) NOT null,
+    lab_fee int(7) NOT null,
+    library_fee int(7) NOT null,
+    registration_fee int(7) NOT null,
+    sports_fee int(7) NOT null,
+    students_welfare_scheme int(7) NOT null,
+    SUG int(7) NOT null,
+    
+    TOTAL int(8) NOT null
+
+);
+
+INSERT INTO year_two_fees (academic_hand_book, caution_fee, course_registration_fee, departmental_dues, development_fee, examination_fee, faculty_dues, health_insurance_scheme, ICT, ID_card, internet_access_fee, lab_fee, library_fee, registration_fee, sports_fee, students_welfare_scheme, SUG, TOTAL) VALUES (3600, 1000, 500, 300, 20000, 5000, 500, 2000, 3700, 500, 6000, 3000, 350, 400, 1000, 500, 600, 71700);
+
+
+
+
+//computer science year 3
+CREATE TABLE year_three_fees(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    academic_hand_book int(7) NOT null,
+    caution_fee int(7) NOT null,
+    course_registration_fee int(7) NOT null,
+    departmental_dues int(7) NOT null,
+    development_fee int(7) NOT null,
+    examination_fee int(7) NOT null,
+    faculty_dues int(7) NOT null,
+    health_insurance_scheme int(7) NOT null,
+    ICT int(7) NOT null,
+    internet_access_fee int(7) NOT null,
+    lab_fee int(7) NOT null,
+    library_fee int(7) NOT null,
+    registration_fee int(7) NOT null,
+    sports_fee int(7) NOT null,
+    students_welfare_scheme int(7) NOT null,
+    SUG int(7) NOT null,
+    
+    TOTAL int(8) NOT null
+
+);
+
+INSERT INTO year_three_fees (academic_hand_book, caution_fee, course_registration_fee, departmental_dues, development_fee, examination_fee, faculty_dues, health_insurance_scheme, ICT, internet_access_fee, lab_fee, library_fee, registration_fee, sports_fee, students_welfare_scheme, SUG, TOTAL) VALUES (3600, 1000, 500, 300, 15000, 3000, 500, 2000, 3700, 3000, 3000, 350, 400, 1000, 500, 600, 51200);
+
 //create courses table
 
 CREATE TABLE courses(

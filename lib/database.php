@@ -11,7 +11,13 @@ class Database{
         "students"=> "students",
         "reg_number_count"=> "reg_number_count",
         "sessions"=> "sessions",
-        "courses"=> "courses"
+        "courses"=> "courses",
+        "year_one_fees"=> "year_one_fees",
+        "year_two_fees"=> "year_two_fees",
+        "year_three_fees"=> "year_three_fees",
+        "year_four_fees"=> "year_four_fees",
+        "year_five_fees"=> "year_five_fees",
+        "year_six_fees"=> "year_six_fees"
     );
 
     public function connect(){
@@ -97,13 +103,9 @@ class Database{
             }
         }
         
-        // $sql = "UPDATE $table SET $stringData WHERE $attribute=$value";
-        //$sql = "UPDATE $table SET $stringData WHERE $querryString";
+       
         $sql = "UPDATE $table SET $stringData WHERE $querryString";
         
-        
-    
-
         $statement = mysqli_stmt_init($this->db); 
 
         if(mysqli_stmt_prepare($statement, $sql)){

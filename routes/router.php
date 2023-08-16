@@ -103,6 +103,24 @@ switch($path . $method){
     break;
 
 
+    case($path == "/student/get-school-fees" and $method == "GET"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isStudent"]()){
+                $studentDashboard["getSchoolFees"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
+
+
     
     default:
     echo "404 no page found";

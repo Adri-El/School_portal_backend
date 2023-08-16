@@ -29,6 +29,52 @@ $studentDashboard["getDashboard"] = function(){
 };
 
 
+$studentDashboard["getSchoolFees"] = function(){
+    global $utilities;
+    global $database;
+    
+    //get user id from decoded token 
+    $userID = $_SERVER["decodedToken"]->userID;
+    try{
+        $year = $_REQUEST["year"];
+        $fees = 0;
+
+        if($year == '1'){
+            //get year one school fees
+            $fees = $database->findOne($database->tables["year_one_fees"], "id", 1);
+
+        }
+        else if($year == '2'){
+            $fees = $database->findOne($database->tables["year_two_fees"], "id", 1);
+        }
+        else if($year == '3'){
+            $fees = $database->findOne($database->tables["year_three_fees"], "id", 1);
+        }
+        else if($year == '4'){
+            $fees = $database->findOne($database->tables["year_four_fees"], "id", 1);
+        }
+        else if($year == '5'){
+            $fees = $database->findOne($database->tables["year_five_fees"], "id", 1);
+        }
+        else if($year == '6'){
+            $fees = $database->findOne($database->tables["year_six_fees"], "id", 1);
+        }
+    
+
+        //send data
+        $responseData = array("status"=> 200, "school_fees_data"=> $fees);
+         $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+         return;
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
+
+
 $studentDashboard["schoolFeesPayment"] = function(){
     global $utilities;
     global $database;
