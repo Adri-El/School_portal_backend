@@ -90,6 +90,56 @@ $adminDashboard["addStudent"] = function(){
     }
 
 };
+
+
+
+$adminDashboard["getStudent"] = function(){
+    global $utilities;
+    global $database;
+
+    try{
+        $reg_no = $_REQUEST["reg_no"];
+
+        if($reg_no){
+
+            //get student details
+            $studentData = $database->findOne($database->tables["students"], "reg_no", $reg_no);
+            unset($studentData["password"]);
+            if($studentData){
+                //send data
+                $responseData = array("status"=> 200, "student_data"=> $studentData);
+                $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+                return;
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "data not found");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+                return;  
+            }
+
+            
+
+        }
+        else{
+            $errorObj = array("status"=> 400, "msg"=> "missing data");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            return;
+        }
+        //set reg number
+        $regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
+    
+
+
+        
+
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
         
 return $adminDashboard;
 ?>
