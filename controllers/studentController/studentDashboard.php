@@ -38,33 +38,46 @@ $studentDashboard["getSchoolFees"] = function(){
     try{
         $year = $_REQUEST["year"];
         $fees = 0;
-
-        if($year == '1'){
-            //get year one school fees
-            $fees = $database->findOne($database->tables["year_one_fees"], "id", 1);
-
-        }
-        else if($year == '2'){
-            $fees = $database->findOne($database->tables["year_two_fees"], "id", 1);
-        }
-        else if($year == '3'){
-            $fees = $database->findOne($database->tables["year_three_fees"], "id", 1);
-        }
-        else if($year == '4'){
-            $fees = $database->findOne($database->tables["year_four_fees"], "id", 1);
-        }
-        else if($year == '5'){
-            $fees = $database->findOne($database->tables["year_five_fees"], "id", 1);
-        }
-        else if($year == '6'){
-            $fees = $database->findOne($database->tables["year_six_fees"], "id", 1);
-        }
+        if($year){
+            if($year == '1'){
+                //get year one school fees
+                $fees = $database->findOne($database->tables["year_one_fees"], "id", 1);
     
+            }
+            else if($year == '2'){
+                $fees = $database->findOne($database->tables["year_two_fees"], "id", 1);
+            }
+            else if($year == '3'){
+                $fees = $database->findOne($database->tables["year_three_fees"], "id", 1);
+            }
+            else if($year == '4'){
+                $fees = $database->findOne($database->tables["year_four_fees"], "id", 1);
+            }
+            else if($year == '5'){
+                $fees = $database->findOne($database->tables["year_five_fees"], "id", 1);
+            }
+            else if($year == '6'){
+                $fees = $database->findOne($database->tables["year_six_fees"], "id", 1);
+            }
+            else{
+                $responseData = array("status"=> 400, "msg"=> "invalid data");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
+                return;  
+            }
+        
+    
+            //send data
+            $responseData = array("status"=> 200, "school_fees_data"=> $fees);
+            $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+            return;
 
-        //send data
-        $responseData = array("status"=> 200, "school_fees_data"=> $fees);
-         $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
-         return;
+        }
+        else{
+            $responseData = array("status"=> 400, "msg"=> "missing data");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
+            return;
+        }
+        
     }
     catch(Exception $ex){
         $errorObj = array("status"=> 500, "msg"=> "server error");
