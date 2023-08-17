@@ -39,6 +39,15 @@ $studentDashboard["getSchoolFees"] = function(){
         $year = $_REQUEST["year"];
         $fees = 0;
         if($year){
+            //check how many year course the person is doing
+            $sessions = $database->findMany($database->tables["sessions"], "user_id", $userID);
+        
+            if((int)$year > $sessions){
+                $responseData = array("status"=> 400, "msg"=> "out of range");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
+                return;
+            }
+            
             if($year == '1'){
                 //get year one school fees
                 $fees = $database->findOne($database->tables["year_one_fees"], "id", 1);

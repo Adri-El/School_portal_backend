@@ -27,7 +27,7 @@ class Database{
     public function getDB(){
         
         return $this->db;
-     }
+    }
 
     public function findOne($table, $attribute, $value){
         $sql = "SELECT * FROM $table WHERE $attribute=?";
@@ -45,6 +45,27 @@ class Database{
             return null;
         }
         
+    }
+
+    public function findMany($table, $attribute, $value){
+        $sql = "SELECT * FROM $table WHERE $attribute=$value";
+        $result = mysqli_query($this->db, $sql);
+        $resultCheck = mysqli_num_rows($result);
+        return $resultCheck;
+
+        //Create a prepared statement
+        $statement = mysqli_stmt_init($this->db);
+        if(mysqli_stmt_prepare($statement, $sql)){
+            mysqli_stmt_bind_param($statement, "s", $value);
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        }
+        else{
+            return null;
+        }
+
     }
 
     public function insertOne($table, $data, $variable_num){
