@@ -17,7 +17,10 @@ $studentAuth["login"] = function(){
             $payload = $utilities["dataTrimmer"]($payload);
 
             //check if student exists in database
-            $studentObj = $database->findOne($database->tables["students"], "reg_no", $payload["reg_no"]);
+            //$studentObj = $database->findOne($database->tables["students"], "reg_no", $payload["reg_no"]);
+            $query = array("reg_no"=> $payload["reg_no"]);
+            $studentObj = $database->findOne($database->tables["students"], $query);
+            
             if($studentObj){
                 //check if password matches
                 if(password_verify($payload["password"], $studentObj["password"])){
@@ -39,7 +42,7 @@ $studentAuth["login"] = function(){
                 
             }
             else{
-                $errorObj = array("status"=> 400, "msg"=> "invalid reg number or password");
+                $errorObj = array("status"=> 400, "msg"=> "invalid reg number or passwordd");
                 $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                 return;
             }

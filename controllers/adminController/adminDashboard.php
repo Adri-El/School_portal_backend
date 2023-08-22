@@ -71,7 +71,7 @@ $adminDashboard["addStudent"] = function(){
         for($i = 0; $i < $duration; $i++ ){
             $session .= $currentSession;
             $session .= "/".++$currentSession."";
-            $sessionData = array("user_id"=> $studentDetail["id"], "session"=> $session, "school_fees"=> 0, "course_reg"=> 0);
+            $sessionData = array("user_id"=> $studentDetail["id"], "session"=> $session, "school_fees"=> 0, "course_reg_semester1"=> 0, "course_reg_semester2"=> 0, "semester1_courses"=>"0", "semester2_courses"=>"0");
             $database->insertOne($database->tables["sessions"], $sessionData, count($sessionData));
 
             $session="";

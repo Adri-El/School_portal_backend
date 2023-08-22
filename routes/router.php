@@ -18,6 +18,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 
 switch($path . $method){
+    //ADMIN ROUTES
     case($path == "/admin/login" and $method == "PUT"):
         $adminAuth["login"]();
     break;
@@ -58,10 +59,30 @@ switch($path . $method){
         } 
     break;
 
+
+    case($path == "/admin/get-student" and $method == "GET"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isAdmin"]()){
+                $adminDashboard["getStudent"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
+
+    //ADMITTED STUDENTS ROUTES
     case($path == "/admitted-student/get-admitted-student" and $method == "GET"):       
         $admittedStudentsController["getAdmittedStudent"]();       
     break;
 
+    //STUDENTS ROUTES
     case($path == "/student/login" and $method == "PUT"):
         $studentAuth["login"]();
     break;
@@ -121,11 +142,11 @@ switch($path . $method){
     break;
 
 
-    case($path == "/admin/get-student" and $method == "GET"):
+    case($path == "/student/get-registration-courses" and $method == "GET"):
         if($middlewear["isTokenValid"]()){
         
-            if($middlewear["isAdmin"]()){
-                $adminDashboard["getStudent"]();
+            if($middlewear["isStudent"]()){
+                $studentDashboard["getRegistrationCourses"]();
             }
             else{
                 $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
@@ -137,6 +158,27 @@ switch($path . $method){
             $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
         } 
     break;
+
+
+    case($path == "/student/register-courses" and $method == "POST"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isStudent"]()){
+                $studentDashboard["registerCourses"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
+
+
+    
 
 
     
