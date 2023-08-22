@@ -12,7 +12,8 @@ $admittedStudentsController["getAdmittedStudent"] = function(){
         $reg_no = $_REQUEST["reg_no"];
 
         //get admitted student data
-        $admittedStudentData = $database->findOne($database->tables["admitted_students"], "reg_no", $reg_no);
+        $query= array("reg_no"=> $reg_no);
+        $admittedStudentData = $database->findOne($database->tables["admitted_students"], $query);
         if($admittedStudentData){
             //send data 
             $responseData = array("status"=> 200, "admitted_student_data"=> $admittedStudentData);
