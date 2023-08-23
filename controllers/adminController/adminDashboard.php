@@ -10,7 +10,8 @@ $adminDashboard["getDashboard"] = function(){
     $userID = $_SERVER["decodedToken"]->userID;
     try{
         //get admin data apart from password
-        $adminData = $database->findOne($database->tables["admins"], "id", $userID);
+        $query= array("id"=> $userID);
+        $adminData = $database->findOne($database->tables["admins"], $query);
         //remove the password
         unset($adminData["password"]);
 
@@ -45,7 +46,8 @@ $adminDashboard["addStudent"] = function(){
         //validate payload
 
         //set reg number
-        $regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
+        $query= array("id"=> 1);
+        $regNo = $database->findOne($database->tables["reg_number_count"], $query); 
         $payload["reg_no"] = "".$payload["session"]."/".$regNo["count"]."";
 
         //update the reg_number_count
@@ -61,7 +63,8 @@ $adminDashboard["addStudent"] = function(){
 
         //
         //get student id
-        $studentDetail = $database->findOne($database->tables["students"], "email", $payload["email"]);
+        $query= array("email"=> $payload["email"]);
+        $studentDetail = $database->findOne($database->tables["students"], $query);
 
         $duration = $payload["duration"];
         $sessions = array();
@@ -103,7 +106,8 @@ $adminDashboard["getStudent"] = function(){
         if($reg_no){
 
             //get student details
-            $studentData = $database->findOne($database->tables["students"], "reg_no", $reg_no);
+            $query= array("reg_no"=> $reg_no);
+            $studentData = $database->findOne($database->tables["students"], $query);
             unset($studentData["password"]);
             if($studentData){
                 //send data
@@ -126,7 +130,7 @@ $adminDashboard["getStudent"] = function(){
             return;
         }
         //set reg number
-        $regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
+       //$regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
     
 
 

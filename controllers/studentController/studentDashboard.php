@@ -10,7 +10,8 @@ $studentDashboard["getDashboard"] = function(){
     $userID = $_SERVER["decodedToken"]->userID;
     try{
         //get admin data apart from password
-        $studentData = $database->findOne($database->tables["students"], "id", $userID);
+        $query = array("id"=>$userID);
+        $studentData = $database->findOne($database->tables["students"], $query);
         //remove the password
         unset($studentData["password"]);
 
@@ -53,23 +54,29 @@ $studentDashboard["getSchoolFees"] = function(){
             
             if($year == '1'){
                 //get year one school fees
-                $fees = $database->findOne($database->tables["year_one_fees"], "id", 1);
+                $query = array("id"=> 1);
+                $fees = $database->findOne($database->tables["year_one_fees"], $query);
     
             }
             else if($year == '2'){
-                $fees = $database->findOne($database->tables["year_two_fees"], "id", 1);
+                $query = array("id"=> 1);
+                $fees = $database->findOne($database->tables["year_two_fees"], $query);
             }
             else if($year == '3'){
-                $fees = $database->findOne($database->tables["year_three_fees"], "id", 1);
+                $query = array("id"=> 1);
+                $fees = $database->findOne($database->tables["year_three_fees"], $query);
             }
             else if($year == '4'){
-                $fees = $database->findOne($database->tables["year_four_fees"], "id", 1);
+                $query = array("id"=> 1);
+                $fees = $database->findOne($database->tables["year_four_fees"], $query);
             }
             else if($year == '5'){
-                $fees = $database->findOne($database->tables["year_five_fees"], "id", 1);
+                $query = array("id"=> 1);
+                $fees = $database->findOne($database->tables["year_five_fees"], $query);
             }
             else if($year == '6'){
-                $fees = $database->findOne($database->tables["year_six_fees"], "id", 1);
+                $query = array("id"=> 1);
+                $fees = $database->findOne($database->tables["year_six_fees"], $query);
             }
             else{
                 $responseData = array("status"=> 400, "msg"=> "invalid data");

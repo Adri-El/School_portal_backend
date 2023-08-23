@@ -18,7 +18,8 @@ $adminAuth["login"] = function(){
             $payload = $utilities["dataTrimmer"]($payload);
 
             //check if admin user exists in database
-            $adminObj = $database->findOne($database->tables["admins"], "username", $payload["username"]);
+            $query = array("username"=>$payload["username"]);
+            $adminObj = $database->findOne($database->tables["admins"], $query);
             if($adminObj){
                 //check if password matches
                 if(password_verify($payload["password"], $adminObj["password"])){
@@ -40,7 +41,7 @@ $adminAuth["login"] = function(){
                 
             }
             else{
-                $errorObj = array("status"=> 400, "msg"=> "invalid username or password");
+                $errorObj = array("status"=> 400, "msg"=> "invalid username or passwordd");
                 $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                 return;
             }
