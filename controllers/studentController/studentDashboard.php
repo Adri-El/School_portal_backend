@@ -178,7 +178,6 @@ $studentDashboard["registerCourses"] = function(){
         
         //get user id from decoded token 
         $userID = $_SERVER["decodedToken"]->userID;
-
         
         //check whether the student has paid school fees for the session
         $query = array("user_id"=> $userID, "session"=> $session);
