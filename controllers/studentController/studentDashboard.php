@@ -193,6 +193,17 @@ $studentDashboard["registerCourses"] = function(){
                     $data = array("course_reg_semester1"=> 1, "semester1_courses"=> "'".implode(',', $payload)."'"); 
                     $database->updateOne($database->tables["sessions"], $data, $updateQuery);
 
+                    //add courses to rergistered course list
+                    
+                    foreach ($payload as $courseID) {
+                        $queryCourse = array("id"=> (int)$courseID);
+                        $course = $database->findOne($database->tables["courses"], $queryCourse);
+                        $insertQuery = array("student_id"=> $userID, "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
+                        
+                        $database->insertOne($database->tables["registered_courses"], $insertQuery, count($insertQuery));
+                
+                    }
+                    //return;
                     //send response
                     $responseData = array("status"=> 200, "msg"=> "sucess");
                     $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
@@ -238,6 +249,35 @@ $studentDashboard["registerCourses"] = function(){
             $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
             return;
         }
+        
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
+
+
+
+
+
+
+
+$studentDashboard["updateProfile"] = function(){
+    global $utilities;
+    global $database;
+
+    try{
+        
+        $payload = json_decode(file_get_contents('php://input'), true); 
+        
+        //get user id from decoded token 
+        $userID = $_SERVER["decodedToken"]->userID;
+        
+        
+        
         
     }
     catch(Exception $ex){

@@ -5,6 +5,7 @@ $adminDashboard = require("controllers/adminController/adminDashboard.php");
 $admittedStudentsController = require("controllers/admittedStudentsController/admittedStudentsController.php");
 $studentAuth = require("controllers/studentController/studentAuth.php");
 $studentDashboard = require("controllers/studentController/studentDashboard.php");
+$employedLecturerController = require("controllers/employedLecturersController/employedLecturersController.php");
 $middlewear = require("lib/middleware.php");
 
 
@@ -178,7 +179,10 @@ switch($path . $method){
     break;
 
 
-    
+    //EMPLOYED LECTURERS ROUTES
+    case($path == "/employed-lecturer/get-employed-lecturer" and $method == "GET"):       
+        $employedLecturerController["getEmployedLecturer"]();       
+    break;
 
 
     
