@@ -258,10 +258,10 @@ CREATE TABLE registered_courses( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
 
 //create employed lecturers table
 
-CREATE TABLE employed_lecturers( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT, first_name varchar(80) NOT null, last_name varchar(80) NOT null, middle_name varchar(80) NOT null, state_of_origin varchar(100) NOT null, email varchar(100) NOT null, phone_number varchar(13) NOT null, id_no varchar(80) NOT null, faculty varchar(100) NOT null, department varchar(100) NOT null, sex varchar(80) NOT null )
+CREATE TABLE employed_lecturers( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT, first_name varchar(80) NOT null, last_name varchar(80) NOT null, middle_name varchar(80) NOT null, state_of_origin varchar(100) NOT null, email varchar(100) NOT null, phone_number varchar(13) NOT null, id_no varchar(80) NOT null, faculty varchar(100) NOT null, department varchar(100) NOT null, sex varchar(80) NOT null, added int(2) )
 
 //insert employed lecturers
-INSERT INTO employed_lecturers (first_name, last_name, middle_name, state_of_origin, email, phone_number, id_no, faculty, department, sex) VALUES ("Emeka", "Okoro", "Daniel", "Imo", "ed@gmail.com", "07036543698", "12345678RF", "Physical science", "Computer science", "Male")
+INSERT INTO employed_lecturers (first_name, last_name, middle_name, state_of_origin, email, phone_number, id_no, faculty, department, sex) VALUES ("Emeka", "Okoro", "Daniel", "Imo", "ed@gmail.com", "07036543698", "12345678RF", "Physical science", "Computer science", "Male", 0)
 
 
 //create lecturers table

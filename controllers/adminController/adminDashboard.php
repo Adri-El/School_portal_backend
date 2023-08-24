@@ -260,7 +260,7 @@ $adminDashboard["addLecturer"] = function(){
     global $database;
 
     try{
-        $id = (int)$_REQUEST["id"];
+        $id_no = $_REQUEST["id_no"];
         //get payload
         $payload = json_decode(file_get_contents('php://input'), true);
         
@@ -270,57 +270,39 @@ $adminDashboard["addLecturer"] = function(){
 
         //validate payload
 
-        //CHECK IF THIS STUDENT EXISTS
-        $admitedStudentQuery = array("id"=> $id);
-        $admittedStudent = $database->findOne($database->tables["admitted_students"], $admitedStudentQuery);
-        if($admittedStudent){
-            if(!$admittedStudent["added"]){
-                //set reg number
-                $query= array("id"=> 1);
-                $regNo = $database->findOne($database->tables["reg_number_count"], $query); 
-                $payload["reg_no"] = "".$payload["session"]."/".$regNo["count"]."";
-
-                //update the reg_number_count
-                $updateData = array("count"=> $regNo["count"] + 1);
-                $querry = array("id"=> $regNo["id"]);
-                $database->updateOne($database->tables["reg_number_count"], $updateData, $querry);
-
-                //hash password
-                $payload["password"] = password_hash($payload["password"], PASSWORD_DEFAULT);
+        //CHECK IF THIS LECTURER EXISTS
         
-                //add to students table
-                $database->insertOne($database->tables["students"], $payload, count($payload));
+        $employedLecturerQuery = array("id_no"=> $id_no);
+        $employedLecturer = $database->findOne($database->tables["employed_lecturers"],  $employedLecturerQuery);
+        
+        if($employedLecturer){
+            if(!$employedLecturer["added"]){
+                
+                //hash password 
+                $employedLecturer["password"]= password_hash($payload["password"], PASSWORD_DEFAULT);
+                unset($employedLecturer["id"]);
+                unset($employedLecturer["added"]);
+                
+                //add to lectures table
+                $database->insertOne($database->tables["lecturers"], $employedLecturer, count($employedLecturer));
+                 
+                // //get lecturer id
+                // $query= array("email"=> $employedLecturer["email"]);
+                // $lecturerDetail = $database->findOne($database->tables["lecturers"], $query);
 
-                //get student id
-                $query= array("email"=> $payload["email"]);
-                $studentDetail = $database->findOne($database->tables["students"], $query);
 
-                $duration = $payload["duration"];
-                $sessions = array();
-                $currentSession = 2023;
-                $session = "";
-
-                for($i = 0; $i < $duration; $i++ ){
-                    $session .= $currentSession;
-                    $session .= "/".++$currentSession."";
-                    $sessionData = array("user_id"=> $studentDetail["id"], "session"=> $session, "school_fees"=> 0, "course_reg_semester1"=> 0, "course_reg_semester2"=> 0, "semester1_courses"=>"0", "semester2_courses"=>"0");
-                    $database->insertOne($database->tables["sessions"], $sessionData, count($sessionData));
-
-                    $session="";
-                }
-
-                //UPDATE ADMITTED STUDENT DATA
-                $updateQuery = array("id"=>$id);
-                $updateAdmittedStudentData = array("added"=>1); 
-                $database->updateOne($database->tables["admitted_students"], $updateAdmittedStudentData, $updateQuery);
+                //UPDATE employed lecturer DATA
+                $updateQuery = array("id_no"=>"'".$id_no."'");
+                $updateEmployedLecturerData = array("added"=>1); 
+                $database->updateOne($database->tables["employed_lecturers"], $updateEmployedLecturerData, $updateQuery);
 
                 //send data
-                $responseData = array("status"=> 200, "matric_no"=> $payload["reg_no"]);
+                $responseData = array("status"=> 200, "msg"=> "success");
                 $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
                 return;
             }
             else{
-                $errorObj = array("status"=> 400, "msg"=> "this student has already been added");
+                $errorObj = array("status"=> 400, "msg"=> "this employee has already been added");
                 $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                 return;
             }

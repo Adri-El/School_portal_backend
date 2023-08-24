@@ -19,7 +19,8 @@ class Database{
         "year_five_fees"=> "year_five_fees",
         "year_six_fees"=> "year_six_fees",
         "registered_courses"=>"registered_courses",
-        "employed_lecturers"=>"employed_lecturers"
+        "employed_lecturers"=>"employed_lecturers",
+        "lecturers"=>"lecturers"
     );
 
     public function connect(){
