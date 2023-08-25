@@ -49,6 +49,20 @@ $middleware["isStudent"] = function(){
     
 };
 
+
+$middleware["isLecturer"] = function(){
+    // Get account type
+     $accType = $_SERVER["decodedToken"]->accType;
+     
+     if($accType == "lecturer"){
+        return true;
+     }
+     else{
+        return false;
+     }
+     
+ };
+
 return $middleware;
 
 ?>

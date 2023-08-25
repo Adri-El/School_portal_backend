@@ -6,6 +6,8 @@ $admittedStudentsController = require("controllers/admittedStudentsController/ad
 $studentAuth = require("controllers/studentController/studentAuth.php");
 $studentDashboard = require("controllers/studentController/studentDashboard.php");
 $employedLecturerController = require("controllers/employedLecturersController/employedLecturersController.php");
+$lecturerAuth = require("controllers/lecturerController/lecturerAuth.php");
+$lecturerDashboard = require("controllers/lecturerController/lecturerDasboard.php");
 $middlewear = require("lib/middleware.php");
 
 
@@ -202,7 +204,28 @@ switch($path . $method){
         $employedLecturerController["getEmployedLecturer"]();       
     break;
 
+    //LECTURERS ROUTES
+    case($path == "/lecturer/login" and $method == "PUT"):
+        $lecturerAuth["login"]();
+    break;
 
+
+    case($path == "/lecturer/get-dashboard" and $method == "GET"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isLecturer"]()){
+                $lecturerDashboard["getDashboard"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
     
     default:
     echo "404 no page found";
