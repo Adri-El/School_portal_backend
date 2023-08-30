@@ -150,6 +150,7 @@ class Database{
     }
 
     public function insertOne($table, $data, $variable_num){
+    
         $columns = array_keys($data);
         $values = array_values($data);
         $placeholder = array_fill(0, $variable_num, '?');

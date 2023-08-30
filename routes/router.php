@@ -8,6 +8,7 @@ $studentDashboard = require("controllers/studentController/studentDashboard.php"
 $employedLecturerController = require("controllers/employedLecturersController/employedLecturersController.php");
 $lecturerAuth = require("controllers/lecturerController/lecturerAuth.php");
 $lecturerDashboard = require("controllers/lecturerController/lecturerDasboard.php");
+$schoolController = require("controllers/schoolController/schoolController.php");
 $middlewear = require("lib/middleware.php");
 
 
@@ -21,6 +22,13 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 
 switch($path . $method){
+    // SCHOOL
+    case($path == "/school/create-student-account" and $method == "POST"):
+            
+        $schoolController["createStudentAccount"](); 
+    break; 
+
+
     //ADMIN ROUTES
     case($path == "/admin/login" and $method == "PUT"):
         $adminAuth["login"]();
@@ -104,6 +112,7 @@ switch($path . $method){
     break;
 
     //STUDENTS ROUTES
+
     case($path == "/student/login" and $method == "PUT"):
         $studentAuth["login"]();
     break;
@@ -226,6 +235,27 @@ switch($path . $method){
             $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
         } 
     break;
+
+
+    case($path == "/lecturer/get-registered-course-students" and $method == "GET"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isLecturer"]()){
+                $lecturerDashboard["getRegisteredCourseStudents"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
+
+
+    
     
     default:
     echo "404 no page found";
