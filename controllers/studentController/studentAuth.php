@@ -17,7 +17,7 @@ $studentAuth["login"] = function(){
             $payload = $utilities["dataTrimmer"]($payload);
 
             //check if student exists in database
-            $query = array("login_id"=> $payload["reg_no"]);
+            $query = array("login_id"=> $payload["login_id"]);
             $studentObj = $database->findOne($database->tables["students"], $query);
             
             if($studentObj){
@@ -34,14 +34,14 @@ $studentAuth["login"] = function(){
                     return;
                 }
                 else{
-                    $errorObj = array("status"=> 400, "msg"=> "invalid reg number or password");
+                    $errorObj = array("status"=> 400, "msg"=> "invalid login id or password");
                     $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                     return;
                 }
                 
             }
             else{
-                $errorObj = array("status"=> 400, "msg"=> "invalid reg number or passwordd");
+                $errorObj = array("status"=> 400, "msg"=> "invalid login id or password");
                 $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                 return;
             }
