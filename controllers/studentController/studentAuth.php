@@ -12,7 +12,7 @@ $studentAuth["login"] = function(){
     
    try{
         //validate payload
-        if($utilities["adminLoginValidator"]($payload, array("reg_no", "password"))["isValid"]){
+        if($utilities["adminLoginValidator"]($payload, array("login_id", "password"))["isValid"]){
             //trim data
             $payload = $utilities["dataTrimmer"]($payload);
 
