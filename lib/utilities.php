@@ -47,6 +47,35 @@ $utilities["adminLoginValidator"] = function($data, $expectedData){
 };
 
 
+
+$utilities["formValidator"] = function($data, $expectedData){
+    $dataKeys = array_keys($data);
+    if(count($dataKeys) == count($expectedData)){
+        
+        foreach ($dataKeys as &$key) {
+            if(!in_array($key, $expectedData)){
+                $errorObj["isValid"] = false;
+                $errorObj["msg"] = "{$key} is an invalid field";
+                return $errorObj;
+            }
+            if(!is_string($data[$key])){
+                $errorObj["isValid"] = false;
+                $errorObj["msg"] = "{$key} should be in string format";
+                return $errorObj;
+            }
+        }
+
+        $successObj["isValid"] = true;
+        return $successObj;
+    }
+    else{
+        $errorObj["isValid"] = false;
+        $errorObj["msg"] = "insufficient or excess data";
+        return $errorObj;
+    }
+};
+
+
 $utilities["dataTrimmer"] = function($data){
     $dataKeys = array_keys($data);
 

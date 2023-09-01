@@ -287,6 +287,32 @@ $studentDashboard["registerCourses"] = function(){
 
 
 
+$studentDashboard["getUpdateData"] = function(){
+    global $utilities;
+    global $database;
+
+    try{
+        //get user id from decoded token 
+        $userID = $_SERVER["decodedToken"]->userID;
+        
+        //GET STUDENT DATA
+        $query = array("id"=> $userID);
+        $studentData = $database->findOne($database->tables["students"], $query);
+        $data = array("state_of_origin"=>$studentData["state_of_origin"], "phone_number"=>$studentData["phone_number"], "guardian_name"=>$studentData["guardian_name"], "guardian_number"=>$studentData["guardian_number"], "email"=>$studentData["email"]);
+
+        //send response
+        $responseData = array("status"=> 200, "data"=> $data);
+        $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+        return;  
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
+
 
 
 $studentDashboard["updateProfile"] = function(){
@@ -300,8 +326,26 @@ $studentDashboard["updateProfile"] = function(){
         //get user id from decoded token 
         $userID = $_SERVER["decodedToken"]->userID;
         
-        
-        
+        //verify payload
+        if($utilities["formValidator"]($payload, array("state_of_origin", "phone_number", "guardian_name", "guardian_number"))["isValid"]){
+            $query = array("id"=> $userID);
+            $updateData = array("state_of_origin"=>"'".$payload["state_of_origin"]."'", "phone_number"=>"'".$payload["phone_number"]."'", "guardian_name"=>"'".$payload["guardian_name"]."'", "guardian_number"=>"'".$payload["guardian_number"]."'");
+            $database->updateOne($database->tables["students"], $updateData, $query);
+
+            //GET STUDENT DATA
+            $studentData = $database->findOne($database->tables["students"], $query);
+            $data = array("state_of_origin"=>$studentData["state_of_origin"], "phone_number"=>$studentData["phone_number"], "guardian_name"=>$studentData["guardian_name"], "guardian_number"=>$studentData["guardian_number"]);
+            //send response
+            $responseData = array("status"=> 200, "data"=> $data);
+            $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+            return;
+        }
+        else{
+           //send response
+            $errorObj = array("status"=> 400, "msg"=> $utilities["formValidator"]($payload, array("state_of_origin", "phone_number", "guardian_name", "guardian_number"))["msg"]);
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            return;  
+        }  
         
     }
     catch(Exception $ex){
