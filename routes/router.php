@@ -243,6 +243,42 @@ switch($path . $method){
     break;
 
 
+    case($path == "/student/update-email" and $method == "PUT"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isStudent"]()){
+                $studentAuth["updateEmail"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
+
+
+    case($path == "/student/update-password" and $method == "PUT"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isStudent"]()){
+                $studentAuth["updatePassword"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
+
+
     //EMPLOYED LECTURERS ROUTES
     case($path == "/employed-lecturer/get-employed-lecturer" and $method == "GET"):       
         $employedLecturerController["getEmployedLecturer"]();       
