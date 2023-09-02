@@ -11,7 +11,7 @@ class Database{
         "students"=> "students",
         "reg_number_count"=> "reg_number_count",
         "sessions"=> "sessions",
-        "courses"=> "courses",
+        "cos"=> "cos",
         "year_one_fees"=> "year_one_fees",
         "year_two_fees"=> "year_two_fees",
         "year_three_fees"=> "year_three_fees",
@@ -31,46 +31,6 @@ class Database{
         
         return $this->db;
     }
-
-    // public function findOne($table, $attribute, $value){
-    //     $sql = "SELECT * FROM $table WHERE $attribute=?";
-
-    //     //Create a prepared statement
-    //     $statement = mysqli_stmt_init($this->db);
-    //     if(mysqli_stmt_prepare($statement, $sql)){
-    //         mysqli_stmt_bind_param($statement, "s", $value);
-    //         mysqli_stmt_execute($statement);
-    //         $result = mysqli_stmt_get_result($statement);
-    //         $row = mysqli_fetch_assoc($result);
-    //         return $row;
-    //     }
-    //     else{
-    //         return null;
-    //     }
-        
-    // }
-
-    // public function findMany($table, $attribute, $value){
-    
-    //     $sql = "SELECT * FROM $table WHERE $attribute=$value";
-    //     $result = mysqli_query($this->db, $sql);
-    //     $resultCheck = mysqli_num_rows($result);
-    //     return $resultCheck;
-
-    //     //Create a prepared statement
-    //     $statement = mysqli_stmt_init($this->db);
-    //     if(mysqli_stmt_prepare($statement, $sql)){
-    //         mysqli_stmt_bind_param($statement, "s", $value);
-    //         mysqli_stmt_execute($statement);
-    //         $result = mysqli_stmt_get_result($statement);
-    //         $row = mysqli_fetch_assoc($result);
-    //         return $row;
-    //     }
-    //     else{
-    //         return null;
-    //     }
-
-    // }
 
     public function findOne($table, $query){
         $columns = array_keys($query);

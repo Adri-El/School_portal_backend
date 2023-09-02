@@ -152,7 +152,35 @@ $studentDashboard["getRegistrationCourses"] = function(){
         $student = $database->findOne($database->tables["students"], $query);
         
         $query = array("department"=> "'".$student["department"]."'", "level"=> $level, "semester"=>$semester);
-        $courses = $database->findMany($database->tables["courses"], $query);
+        $courses = $database->findMany($database->tables[$student["dept_code"]], $query);
+
+        echo json_encode($courses);
+        return;
+
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
+
+
+$studentDashboard["getMoreRegistrationCourses"] = function(){
+    global $utilities;
+    global $database;
+
+    try{
+        $semester = (int)$_REQUEST["semester"];
+        
+        //get user id from decoded token 
+        $userID = $_SERVER["decodedToken"]->userID;
+        $query = array("id"=> $userID);
+        $student = $database->findOne($database->tables["students"], $query);
+        
+        $query = array("department"=> "'".$student["department"]."'", "semester"=>$semester);
+        $courses = $database->findMany($database->tables[$student["dept_code"]], $query);
 
         echo json_encode($courses);
         return;
@@ -189,77 +217,101 @@ $studentDashboard["registerCourses"] = function(){
         
             $sessionCheck = $database->findOne($database->tables["sessions"], $query);
             if($sessionCheck["school_fees"]){
-            
-                if($semester == 1){
-                    //check if student has already registered for the semester
-                    if(!$sessionCheck["course_reg_semester1"]){
-                        //rgister the courses
-                        $updateQuery = array("user_id"=> $userID, "session"=> "'".$session."'");
-                        $data = array("course_reg_semester1"=> 1, "semester1_courses"=> "'".implode(',', $payload)."'"); 
-                        $database->updateOne($database->tables["sessions"], $data, $updateQuery);
 
-                        //add courses to rergistered course list
-                        //$student = $database->findOne($database->tables["students"], array("id"=>$userID));
-                    
-                        foreach ($payload as $courseID) {
-                            $queryCourse = array("id"=> (int)$courseID);
-                            $course = $database->findOne($database->tables["courses"], $queryCourse);
-                            $insertQuery = array("student_id"=> $userID, "matric_no"=>$studentData["matric_no"], "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
-                        
-                            $database->insertOne($database->tables["registered_courses"], $insertQuery, count($insertQuery));
-                
-                        }
+                //check if the unit load is within range
+                $maxUnitload= 0;
+                for($i=0; $i<count($payload); $i++){
+                    $course = $database->findOne($database->tables[$studentData["dept_code"]], array("id"=>(int)$payload[$i]));
 
-                        if($studentData["login_id"]!= $studentData["matric_no"]){
-                            $updateData = array("login_id"=> "'".$studentData["matric_no"]."'");
-                            $updateQuery = array("id"=> $userID);
-                            $database->updateOne($database->tables["students"], $updateData,  $updateQuery);
-                        }
-                    
-                        $responseData = array("status"=> 200, "msg"=> "sucess");
-                        $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
-                        return;
-                    }
-                    else{
-                        //send response
-                        $responseData = array("status"=> 400, "msg"=> "this semester is registered already");
-                        $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
-                        return;
-                    }
-
+                    $maxUnitload += $course["unit"];
                 }
-                else if($semester == 2){
-                    //check if student has already registered for the semester
-                    if(!$sessionCheck["course_reg_semester2"]){
-                        //rgister the courses
-                        $updateQuery = array("user_id"=> $userID, "session"=> "'".$session."'");
-                        $data = array("course_reg_semester2"=> 1, "semester2_courses"=> "'".implode(',', $payload)."'"); 
-                        $database->updateOne($database->tables["sessions"], $data, $updateQuery);
 
-                        if($studentData["login_id"]!= $studentData["matric_no"]){
-                            $updateData = array("login_id"=> "'".$studentData["matric_no"]."'");
-                            $updateQuery = array("id"=> $userID);
-                            $database->updateOne($database->tables["students"], $updateData,  $updateQuery);
+                if($maxUnitload <= 25){
+                    if($semester == 1){
+                        //check if student has already registered for the semester
+                        if(!$sessionCheck["course_reg_semester1"]){
+                            //rgister the courses
+                            $updateQuery = array("user_id"=> $userID, "session"=> "'".$session."'");
+                            $data = array("course_reg_semester1"=> 1, "semester1_courses"=> "'".implode(',', $payload)."'"); 
+                            $database->updateOne($database->tables["sessions"], $data, $updateQuery);
+    
+                            //add courses to rergistered course list
+                            //$student = $database->findOne($database->tables["students"], array("id"=>$userID));
+                        
+                            foreach ($payload as $courseID) {
+                                $queryCourse = array("id"=> (int)$courseID);
+                                $course = $database->findOne($database->tables[$studentData["dept_code"]], $queryCourse);
+                                $insertQuery = array("student_id"=> $userID, "matric_no"=>$studentData["matric_no"], "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
+                            
+                                $database->insertOne($database->tables["registered_courses"], $insertQuery, count($insertQuery));
+                    
+                            }
+    
+                            if($studentData["login_id"]!= $studentData["matric_no"]){
+                                $updateData = array("login_id"=> "'".$studentData["matric_no"]."'");
+                                $updateQuery = array("id"=> $userID);
+                                $database->updateOne($database->tables["students"], $updateData,  $updateQuery);
+                            }
+                        
+                            $responseData = array("status"=> 200, "msg"=> "sucess");
+                            $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+                            return;
                         }
+                        else{
+                            //send response
+                            $responseData = array("status"=> 400, "msg"=> "this semester is registered already");
+                            $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
+                            return;
+                        }
+    
+                    }
+                    else if($semester == 2){
+                        //check if student has already registered for the semester
+                        if(!$sessionCheck["course_reg_semester2"]){
+                            //rgister the courses
+                            $updateQuery = array("user_id"=> $userID, "session"=> "'".$session."'");
+                            $data = array("course_reg_semester2"=> 1, "semester2_courses"=> "'".implode(',', $payload)."'"); 
+                            $database->updateOne($database->tables["sessions"], $data, $updateQuery);
 
-                        //send response
-                        $responseData = array("status"=> 200, "msg"=> "sucess");
-                        $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
-                        return;
+                            foreach ($payload as $courseID) {
+                                $queryCourse = array("id"=> (int)$courseID);
+                                $course = $database->findOne($database->tables[$studentData["dept_code"]], $queryCourse);
+                                $insertQuery = array("student_id"=> $userID, "matric_no"=>$studentData["matric_no"], "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
+                            
+                                $database->insertOne($database->tables["registered_courses"], $insertQuery, count($insertQuery));
+                    
+                            }
+    
+                            if($studentData["login_id"]!= $studentData["matric_no"]){
+                                $updateData = array("login_id"=> "'".$studentData["matric_no"]."'");
+                                $updateQuery = array("id"=> $userID);
+                                $database->updateOne($database->tables["students"], $updateData,  $updateQuery);
+                            }
+    
+                            //send response
+                            $responseData = array("status"=> 200, "msg"=> "sucess");
+                            $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+                            return;
+                        }
+                        else{
+                            //send response
+                            $responseData = array("status"=> 400, "msg"=> "this semester is registered already");
+                            $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
+                            return;
+                        }
                     }
                     else{
-                        //send response
-                        $responseData = array("status"=> 400, "msg"=> "this semester is registered already");
+                        $responseData = array("status"=> 400, "msg"=> "invalid semester");
                         $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
                         return;
                     }
+
                 }
                 else{
-                    $responseData = array("status"=> 400, "msg"=> "invalid semester");
+                    $responseData = array("status"=> 400, "msg"=> "maximum unit load is 25");
                     $utilities["sendResponse"](400, "Content-Type: application/json", $responseData, true);
                     return;
                 }
-            
             }
             else{
                 $responseData = array("status"=> 400, "msg"=> "session school fees not paid");
