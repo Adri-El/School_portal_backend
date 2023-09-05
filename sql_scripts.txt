@@ -265,7 +265,7 @@ INSERT INTO courses (title, code, unit, semester, level, faculty, department) VA
 
 
 
-CREATE TABLE registered_courses( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT, student_id int(2) NOT null, matric_no varchar(80) NOT null, session varchar(20) NOT null, semester int(2), course_id int(11) NOT null, title varchar(300) NOT null, code varchar(80) NOT null, unit int(2) NOT null, CA int(3), exam int(3), total int(3), grade varchar(2))
+CREATE TABLE registered_courses( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT, student_id int(2) NOT null, student_dept varchar(100) NOT null, matric_no varchar(80) NOT null, session varchar(20) NOT null, semester int(2), course_id int(11) NOT null, course_dept varchar(100) NOT null, title varchar(300) NOT null, code varchar(80) NOT null, unit int(2) NOT null, CA int(3), exam int(3), total int(3), grade varchar(2))
 
 
 //create employed lecturers table

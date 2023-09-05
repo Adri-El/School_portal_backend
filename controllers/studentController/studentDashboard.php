@@ -154,7 +154,9 @@ $studentDashboard["getRegistrationCourses"] = function(){
         $query = array("department"=> "'".$student["department"]."'", "level"=> $level, "semester"=>$semester);
         $courses = $database->findMany($database->tables[$student["dept_code"]], $query);
 
-        echo json_encode($courses);
+        //send data
+        $responseData = array("status"=> 200, "courses"=> $courses);
+        $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
         return;
 
     }
@@ -182,8 +184,11 @@ $studentDashboard["getMoreRegistrationCourses"] = function(){
         $query = array("department"=> "'".$student["department"]."'", "semester"=>$semester);
         $courses = $database->findMany($database->tables[$student["dept_code"]], $query);
 
-        echo json_encode($courses);
+        //send data
+        $responseData = array("status"=> 200, "courses"=> $courses);
+        $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
         return;
+        
 
     }
     catch(Exception $ex){
@@ -241,7 +246,7 @@ $studentDashboard["registerCourses"] = function(){
                             foreach ($payload as $courseID) {
                                 $queryCourse = array("id"=> (int)$courseID);
                                 $course = $database->findOne($database->tables[$studentData["dept_code"]], $queryCourse);
-                                $insertQuery = array("student_id"=> $userID, "matric_no"=>$studentData["matric_no"], "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
+                                $insertQuery = array("student_id"=> $userID, "student_dept"=> $studentData["department"], "matric_no"=>$studentData["matric_no"], "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "course_dept"=>$course["department"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
                             
                                 $database->insertOne($database->tables["registered_courses"], $insertQuery, count($insertQuery));
                     
@@ -276,7 +281,7 @@ $studentDashboard["registerCourses"] = function(){
                             foreach ($payload as $courseID) {
                                 $queryCourse = array("id"=> (int)$courseID);
                                 $course = $database->findOne($database->tables[$studentData["dept_code"]], $queryCourse);
-                                $insertQuery = array("student_id"=> $userID, "matric_no"=>$studentData["matric_no"], "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
+                                $insertQuery = array("student_id"=> $userID, "student_dept"=> $studentData["department"], "matric_no"=>$studentData["matric_no"], "session"=>$session, "semester"=>$course["semester"], "course_id"=> $course["id"], "course_dept"=>$course["department"], "title"=>$course["title"], "code"=> $course["code"], "unit"=> $course["unit"]);
                             
                                 $database->insertOne($database->tables["registered_courses"], $insertQuery, count($insertQuery));
                     
