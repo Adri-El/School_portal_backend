@@ -53,11 +53,11 @@ switch($path . $method){
     break;
 
 
-    case($path == "/admin/add-student" and $method == "POST"):
+    case($path == "/admin/give-matric-no" and $method == "PUT"):
         if($middlewear["isTokenValid"]()){
         
             if($middlewear["isAdmin"]()){
-                $adminDashboard["addStudent"]();
+                $adminDashboard["giveMatricNumber"]();
             }
             else{
                 $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
