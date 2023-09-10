@@ -341,6 +341,61 @@ $studentDashboard["registerCourses"] = function(){
 };
 
 
+$studentDashboard["getPrevCourseReg"] = function(){
+    global $utilities;
+    global $database;
+
+    try{
+        $session = $_REQUEST["session"];
+        $semester = (int) $_REQUEST["semester"];
+        //get user id from decoded token 
+        $userID = $_SERVER["decodedToken"]->userID;
+        
+        //GET courses
+        $query = array("student_id"=>$userID, "semester"=> $semester, "session"=> "'".$session."'");
+        $courses = $database->findMany($database->tables["registered_courses"], $query);
+        
+        if($courses){
+            //refine data
+            $refinedCourses = array();
+
+            foreach($courses as $course){
+                $refinedCourse = array();
+                $refinedCourse["id"] = $course["id"];
+                $refinedCourse["session"] = $course["session"];
+                $refinedCourse["code"] = $course["code"];
+                $refinedCourse["title"] = $course["title"];
+                $refinedCourse["code"] = $course["code"];
+                $refinedCourse["semester"] = $course["semester"];
+                $refinedCourse["unit"] = $course["unit"];
+
+                array_push($refinedCourses, $refinedCourse);
+
+            }
+            //send response
+            $responseData = array("status"=> 200, "courses"=> $refinedCourses);
+            $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+            return;  
+        }
+        else{
+            $errorObj = array("status"=> 400, "msg"=> "no courses were registerd for this semester");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            return;  
+        }
+
+        
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
+
+
+
+
 
 
 
