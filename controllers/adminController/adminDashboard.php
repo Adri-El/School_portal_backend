@@ -119,7 +119,7 @@ $adminDashboard["giveMatricNumber"] = function(){
                 return;
             }
             else{
-                $errorObj = array("status"=> 400, "msg"=> "this student has already been added");
+                $errorObj = array("status"=> 400, "msg"=> "this student already has a matric number");
                 $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
                 return;
             }
