@@ -41,15 +41,16 @@ $adminDashboard["getStudent"] = function(){
     global $database;
 
     try{
-        $reg_no = $_REQUEST["reg_no"];
+        $matric_no = $_REQUEST["matric_no"];
 
-        if($reg_no){
+        if($matric_no){
 
             //get student details
-            $query= array("reg_no"=> $reg_no);
+            $query= array("matric_no"=> $matric_no);
             $studentData = $database->findOne($database->tables["students"], $query);
-            unset($studentData["password"]);
+            
             if($studentData){
+                unset($studentData["password"]);
                 //send data
                 $responseData = array("status"=> 200, "student_data"=> $studentData);
                 $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
@@ -199,6 +200,54 @@ $adminDashboard["addLecturer"] = function(){
             return;
         }
         
+
+    }
+    catch(Exception $ex){
+        $errorObj = array("status"=> 500, "msg"=> "server error");
+        $utilities["sendResponse"](500, "Content-Type: application/json", $errorObj, true);
+        return; 
+    }
+
+};
+
+
+
+$adminDashboard["getStudentByJambRegNo"] = function(){
+    global $utilities;
+    global $database;
+
+    try{
+        $jamb_reg_no = $_REQUEST["jamb_reg_no"];
+
+        if($jamb_reg_no){
+
+            //get student details
+            $query= array("jamb_reg_no"=> $jamb_reg_no);
+            $studentData = $database->findOne($database->tables["students"], $query);
+            
+            if($studentData){
+                unset($studentData["password"]);
+                //send data
+                $responseData = array("status"=> 200, "student_data"=> $studentData);
+                $utilities["sendResponse"](200, "Content-Type: application/json", $responseData, true);
+                return;
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "data not found");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+                return;  
+            }
+
+            
+
+        }
+        else{
+            $errorObj = array("status"=> 400, "msg"=> "missing data");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            return;
+        }
+        //set reg number
+       //$regNo = $database->findOne($database->tables["reg_number_count"], "id", 1); 
 
     }
     catch(Exception $ex){

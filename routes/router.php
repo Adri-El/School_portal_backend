@@ -106,6 +106,23 @@ switch($path . $method){
         } 
     break;
 
+    case($path == "/admin/get-student-by-jamb-reg-no" and $method == "GET"):
+        if($middlewear["isTokenValid"]()){
+        
+            if($middlewear["isAdmin"]()){
+                $adminDashboard["getStudentByJambRegNo"]();
+            }
+            else{
+                $errorObj = array("status"=> 400, "msg"=> "This account is not authorized to access this route");
+                $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+            }    
+        }
+        else{ 
+            $errorObj = array("status"=> 400, "msg"=> "Unauthorized");
+            $utilities["sendResponse"](400, "Content-Type: application/json", $errorObj, true);
+        } 
+    break;
+
     //ADMITTED STUDENTS ROUTES
     case($path == "/admitted-student/get-admitted-student" and $method == "GET"):       
         $admittedStudentsController["getAdmittedStudent"]();       

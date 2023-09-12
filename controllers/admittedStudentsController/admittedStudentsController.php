@@ -9,10 +9,10 @@ $admittedStudentsController["getAdmittedStudent"] = function(){
     
     try{
         //extract query string from url
-        $reg_no = $_REQUEST["reg_no"];
+        $jamb_reg_no = $_REQUEST["jamb_reg_no"];
 
         //get admitted student data
-        $query= array("reg_no"=> $reg_no);
+        $query= array("jamb_reg_no"=> $jamb_reg_no);
         $admittedStudentData = $database->findOne($database->tables["admitted_students"], $query);
         if($admittedStudentData){
             //send data 
