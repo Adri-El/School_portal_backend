@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="Landing_Page.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/20a5eafc37.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="create">
+        <section class="main-content" id="home">
+            <h1 class="h1">Welcome to </h1>
+            <h1>Internship University</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cum, quibusdam neque dolorem excepturi magnam eum!</p>
+            <p>Consequuntur, explicabo optio rem, nostrum corporis nobis iste corrupti nisi aliquam quisquam iure delectus.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cum, quibusdam neque dolorem excepturi magnam eum! </p>
+            <p>Consequuntur, explicabo optio rem, nostrum corporis nobis iste corrupti nisi aliquam quisquam iure delectus.</p>
+            <!-- <footer>
+                <p>fdgvhjhhhbj</p>
+            </footer> -->
+        </section>
+
+        <section id="create-account" class="create_form">
+            <h1>Update Profile</h1>
+            <div>
+                <div class="input-field">
+                    <i class="fa-solid fa-user"></i>
+                    <input id="reg_no" type="username" placeholder="Registration Number">
+    
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input id="password" type="password" placeholder="Password">
+                </div>
+                <button id="submit" class="block">Login</button>
+                <p class="error" id="error_msg"></p>
+            </div>
+        </section>
+        </div>
+    </div>
+
+    <div class="topBar">
+        <div class="logo">
+            <img src="\image\logo.png">
+        </div>
+        <div class="topTable">
+            <a href="#home">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+            <a href="#">About</a>
+        </div>
+        <div class="link">
+            <a href="#create-account" class="create">Create Account</a>
+            <li>
+                <button class="login_btn" id="dropDown">Login</button>
+                <ul class="login-show" id="login_show"> 
+                    <li><a href="#">Login as Student</a></li>  
+                    <li><a href="#" class="lecturer">Login as Lecturer</a></li> 
+                </ul>
+            </li>
+        </div>
+    
+    </div>
+<script type="module" src="Landing_page.js"></script>
+</body>
+</html>

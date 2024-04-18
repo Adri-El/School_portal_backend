@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+
+    <!-- This div conains the whole content of the page -->
+    <div class="whole-content">
+
+        <!-- This tag contains whole content of the topbar -->
+        <nav class="topbar">
+            <div>
+                <input type="text" class="search-input" placeholder="Search...">
+            </div>
+            <!-- <div class="user-info">
+                <img src="/images/1x/baseline_admin_panel_settings_white_24dp.png"><span id="username">username</span>
+            </div> -->
+            <div class="sign-out" id="sign-out">
+                <a>
+                    <img src="/images/1x/baseline_logout_white_24dp.png"><p>Signout</p>
+                </a>   
+            </div> 
+        </nav>
+    
+        <!-- This tag contains the whole content of the sidebar -->
+        <nav class="sidebar">
+            <div class="text">
+                <img src="\images\logo.png">
+            </div>
+            <div class="main">
+                <p>Internship University</p>
+            </div>
+
+            <div class="container">
+            <ul>
+                <li><a href="#dashboard"><img src="/images/1x/baseline_dashboard_white_24dp.png"><p>Dashboard</p></a></li>
+                <li>
+                    <a href="#student" class="std_btn"><img src="/images/1x/baseline_person_white_24dp.png"><p id="dropDown">Biodata
+                        <i class="fa fa-caret-down first"></i></p>
+                    </a>
+                    <ul class="std-show" id="bio_drop"> 
+                        <li><a href="#section1" id="biodata">View Biodata</a></li>
+                        <li><a href="#section2">Edit Biodata</a></li>
+                        <li><a href="#section4">Change Password/Email</a></li>   
+                    </ul>
+                </li>
+                <li>
+                    <a href="#payment" class="ins-btn"><img src="/images/1x/baseline_payments_white_24dp.png"><p id="dropDown2">Fees Payment
+                        <i class="fa fa-caret-down second"></i></p>
+                    </a>
+                    <ul class="ins-show" id="fees_show"> 
+                        <li><a href="#section3">Pay School Fees</a></li>  
+                        <li><a href="#">School Fees History</a></li>  
+                        <li><a href="#">Reprint School Fees</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#course" class="ins-btn"><img src="/images/1x/baseline_how_to_reg_white_24dp.png"><p id="dropDown3">Course Reg
+                        <i class="fa fa-caret-down second"></i></p>
+                    </a>
+                    <ul class="ins-show" id="reg_show"> 
+                        <li><a href="#register">Register Course</a></li>
+                        <li><a href="#">Register Professional Exam</a></li>  
+                        <li><a href="#section6">Reprint Course Reg</a></li>  
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="ins-btn"><img src="/images/1x/baseline_school_white_24dp.png"><p id="dropDown4">Result
+                        <i class="fa fa-caret-down second"></i></p>
+                    </a>
+                    <ul class="ins-show" id="result_show"> 
+                        <li><a href="#section5">View Result</a></li>
+                        <li><a href="#">Check Professional Exam</a></li>  
+                        <li><a href="#">Get Result Invoice</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="ins-btn"><img src="/images/1x/baseline_gite_white_24dp.png"><p id="dropDown5">Hostel Allocation
+                        <i class="fa fa-caret-down second"></i></p>
+                    </a>
+                    <ul class="ins-show" id="hostel_show"> 
+                        <li><a href="#">Get Hostel Fees Invoice</a></li>
+                        <li><a href="#">Pay Hostel Fees</a></li>  
+                        <li><a href="#">Hostel Fees History</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="ins-btn"><img src="/images/1x/baseline_school_white_24dp.png"><p id="dropDown6">Certified Courses
+                        <i class="fa fa-caret-down second"></i></p>
+                    </a>
+                    <ul class="ins-show" id="course_show"> 
+                        <li><a href="#">Register Certified Courses</a></li>
+                        <li><a href="#">Access Lecture Room</a></li>  
+                        <li><a href="#">Join Virtual Class</a></li>  
+                        <li><a href="#">Print Certificate Result</a></li>
+                    </ul>
+                </li>
+            </ul>
+            </div> 
+        </nav>
+
+
+        <div class="content">
+            <section id="dashboard" class="form-box">
+                    <h1>Welcome... 
+                        <p id="username"></p>
+                    </h1>
+            </section>
+            <!-- This section contains a form for Student View Biodata -->
+            <section class="form-add" id="section1">
+                <p><label for="firstName">First Name: <span id="firstName"></span></label>
+                <label class="left" for="middle name">Middle Name: <span id="middleName"></span></label>
+                <label for="lastName">Last Name: <span id="lastName"></span></label></p><br>
+                <p><label for="faculty">Faculty: <span id="faculty"></span></label>
+                <label class="left" for="department">Department: <span id="department"></span></label><br>
+                <p><label for="year">Year of Entry: <span id="year"></span></label>
+                <label for="reg_number">Registration Number: <span id="reg_number"></span></label>
+                <label for="matric number">Matric Number: <span id="matric_number"></span></label></p><br>
+                <!-- <label for="password">Password: <input type="text" id="password" name="password"></label><br> -->
+                <p><label for="session">Duration: <span id="duration"></span>yrs</label>
+                <label for="state_of_origin">State of Origin: <span id="state"></span></label>
+                <label for="email">Email: <span id="email"></span></label></p><br>
+                <p><label for="phone_no">Phone Number: <span id="phone_no"></span></label>
+                <label for="guardian_name">Guardian Name: <span id="guardian_name"></span></label></p><br>
+                <p><label for="guardian_phone_no">Guardian Phone No: <span id="guardian_phone_no"></span></label>
+
+                <label for="sex">Gender: <span id="sex"></span></label></p>
+            </section>
+
+            <!-- This section contains a form for Student Edit Biodata -->
+            <section class="edit-form-add" id="section2">
+                <!-- <p><label for="firstName">First Name: <span id="first_Name"></span></label>
+                <label class="left" for="middle name">Middle Name: <span id="middle_Name"></span></label>
+                <label for="lastName">Last Name: <span id="last_Name"></span></label></p><br>
+                <p><label for="faculty">Faculty: <span id="faculty_id"></span></label>
+                <label class="left" for="department">Department: <span id="department_id"></span></label>
+                <label for="year">Year: <span id="year_id"></span></label></p><br>
+                <p><label for="reg_number">Registration Number: <span id="reg_number_id"></span></label>
+                <label for="session">Session: <span id="session_id"></span></label> -->
+                <p><label for="state_of_origin">State of Origin: <input type="text" id="state_id"></label></p><br>
+                <!-- <label for="email">Email: <input type="email" id="email_id"></label> -->
+                <!-- <label for="password">Password: <input type="text" id="password" name="password"></label></p><br> -->
+                <p><label for="phone_no">Phone Number: <input type="text" id="phone_no_id"></label></p><br>
+                <p><label for="guardian_name">Guardian Name: <input type="text" id="guardian_name_id"></label></p><br>
+                <p><label for="guardian_phone_no">Guardian Phone No: <input type="text" id="guardian_phone_no_id"></label></p>
+                <!-- <label for="sex">Gender: <span id="sex_id"></span></label></p> -->
+                <button id="update_biodata" class="update_biodata">Update Biodata</button>
+            </section>
+
+            <section id="section4" class="change_email-password">
+                <div id="change_email">
+                <label for="Email"> Change Email: <input type="email" id="new_email"></label>
+                <label for="Password">Your Password: <input type="password" id="change_email_password"></label>
+                <button class="change" id="change-email">Change Email</button>
+                </div>
+
+                <div id="change_passwords">
+                    <label for="old_password">Old Password: <input type="password" id="old_password"></label>
+                    <label for="new_password">New Password: <input type="password" id="new_password"></label>
+                    <button class="change" id="change_password">Change Password</button>
+                </div>
+            </section>
+
+            <section id="section3">
+                <div class="add">
+                    <label> Select Year:
+                        <select id="Year" class="year">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </label>
+                    <p id="details"></p>
+                    <a href="#form" id="search"><button class="btn">Search</button></a>
+                </div>
+            </section>
+
+            <section class="fees" id="form">
+                <h3>
+                    Internship University Fees
+                </h3>
+                <table id="fees_table">
+                    <tr>
+                        <th>Levy</th>
+                        <th>Price</th>
+                    </tr>
+                </table>
+                <ul id="card">
+                    <p><h2>Card Details</h2></p>
+                    <label>Card Number: <input type="text" id="card_number" placeholder="Enter Card Number"></label>
+                    <label>CVV: <input type="text" id="cvv" placeholder="Enter CVV"></label><br>
+                    <label>Expiry Date: <input type="text" id="expiry_date" placeholder="Enter Expiry Date"></label>
+                    <label>Session: <input type="text" id="payment_session" placeholder="Enter session"></label>
+                    <button id="btn-pay">Pay</button>
+                    <p id="success"></p>
+                </ul>
+            
+            </section>
+
+            <section id="register" class="register">
+                <label>Level:
+                    <select class="course_reg_details" name="level" id="level">
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                        <option value="400">400</option>
+                        <option value="500">500</option>
+                        <option value="600">600</option>
+                    </select>
+                </label>
+                <label> Semester: 
+                    <select class="course_reg_details" name="semester" id="semester">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </label>
+                <label for="session" class="course_reg_session">Session:<input id="course_reg_session" type="text" placeholder="Session"></label>
+                <button id="get_course">Get Courses</button>
+            </section>
+
+            <section id="course_reg_form" class="course_reg_form">
+                <p>Click <Button id="extra_course">Here</Button> to Borrow Course</p>
+                <table id="course_reg">
+                    <tr>
+                        <th>Check</th>
+                        <th>Course Title</th>
+                        <th>Course Code</th>
+                        <th>Unit</th>
+                    </tr>
+                </table>
+                <button id="submit_course" class="submit_course">Submit</button>
+            </section>
+
+            <section id="section5">
+                <div class="get_result" id="result_student">
+                    <label for="session">Input Session: <input type="text" placeholder="Session" id="result_session"></label><br>
+                    <label for="semester">Semester:
+                        <select id="result_semester" name="Semester">
+                           <option value="1">First Semester</option>
+                           <option value="2">Second Semester</option>
+                       </select>
+                       </label>
+                       <button id="get_result" class="get_student">Check Result</button>
+                </div>
+            </section>
+
+            <section id="get_reg_form" class="get_reg_form">
+                <h2>View Results</h2>
+                <table id="get_reg_student" border="1">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>CA</th>
+                        <th>Exam</th>
+                        <th>Total</th>
+                        <th>Grade</th>
+                    </tr>
+                </table>
+            </section>
+
+            <section id="section6">
+                <div class="reprint_course_reg" id="reprint_course_reg">
+                    <label for="session">Input Session: <input type="text" placeholder="Session" id="course_reg_sessions"></label><br>
+                    <label for="semester">Semester:
+                        <select id="course_reg_semester" name="Semester">
+                           <option value="1">First Semester</option>
+                           <option value="2">Second Semester</option>
+                       </select>
+                       </label>
+                       <button id="reprint_course" class="reprint_course">Reprint Course Registration</button>
+                </div>
+            </section>
+            <section id="reprint_course_form" class="reprint_course_form">
+                <h2>View Courses Registered</h2>
+                <table id="reprint_course_student" border="1">
+                    <tr>
+                        <th>Course Title</th>
+                        <th>Course Code</th>
+                        <th>Unit</th>
+                        <th>Semester</th>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script type="module" src="Dashboard.js"></script> 
+</body>
+</html>

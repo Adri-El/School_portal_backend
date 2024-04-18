@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+
+    <!-- This div conains the whole content of the page -->
+    <div class="whole-content">
+
+        <!-- This tag contains whole content of the topbar -->
+        <nav class="topbar">
+            <div>
+                <input type="text" class="search-input" placeholder="Search...">
+            </div>
+            <div class="user-info">
+                <img src="/images/1x/baseline_admin_panel_settings_white_24dp.png"><span id="username">username</span>
+            </div>
+            <div class="sign-out" id="sign-out">
+                <a>
+                    <img src="/images/1x/baseline_logout_white_24dp.png"><p>Signout</p>
+                </a>   
+            </div> 
+        </nav>
+    
+        <!-- This tag contains the whole content of the sidebar -->
+        <nav class="sidebar">
+            <div class="text">
+                <img src="\images\logo.png">
+            </div>
+            <div class="main">
+                <p>Internship University</p>
+            </div>
+
+            <div class="container">
+            <ul>
+                <li><a href="#dashboard"><img src="/images/1x/baseline_dashboard_white_24dp.png"><p>Dashboard</p></a></li>
+                <li>
+                    <a href="#student" class="std_btn"><img src="/images/1x/baseline_groups_white_24dp.png"><p id="dropDown">Student
+                        <i class="fa fa-caret-down first"></i></p>
+                    </a>
+                    <ul class="std-show" id="std_drop"> 
+                        <li><a href="#section1">Add student</a></li>
+                        <!-- <li><a href="#section2">Edit student profile</a></li> -->
+                        <li><a href="#section3">View Student Profile</a></li>  
+                        <!-- <li><a href="#section4">Delete student</a></li>   -->
+                    </ul>
+                </li>
+                <!-- <li>
+                    <a href="#" class="ins-btn"><img src="/images/1x/baseline_school_white_24dp.png"><p id="dropDown1">Instance
+                        <i class="fa fa-caret-down second"></i></p>
+                    </a>
+                    <ul class="ins-show" id="ins_show"> 
+                        <li><a href="#">Add course</a></li>
+                        <li><a href="#">Drop course</a></li>  
+                        <li><a href="#">Add department</a></li>  
+                        <li><a href="#">Add program</a></li>
+                    </ul>
+                </li> -->
+                <li>
+                    <a href="#student" class="std_btn"><img src="/images/1x/baseline_groups_white_24dp.png"><p id="dropDown2">Lecturer
+                        <i class="fa fa-caret-down first"></i></p>
+                    </a>
+                    <ul class="std-show" id="lecturer_dropDown"> 
+                        <li><a href="#section5">Add Lecturer</a></li>
+                        <!-- <li><a href="#section2">Edit student profile</a></li>
+                        <li><a href="#section3">View Student Profile</a></li>  
+                        <li><a href="#section4">Delete student</a></li>   -->
+                    </ul>
+                </li>
+            </ul>
+            </div> 
+        </nav>
+
+        <!-- This div contain the whole content -->
+        <div class="content">
+            <section id="dashboard" class="form-box">
+                    <h1>Welcome... 
+                        <span id="username1"></span> 
+                    </h1>
+            </section>
+
+            <section id="section1">
+                <div class="add">
+                    <input id="reg_no" type="text" name="regno" placeholder="Input Registration Number">
+                    <p id="details" class="details"></p>
+                    <button id="search" class="btn">Search</button>
+                </div>
+            </section>
+
+            <section id="section5">
+                <div class="add_lecturer">
+                    <input id="ID" type="text" name="ID" placeholder="Input Employment ID">
+                    <p id="lecturer_details" class="details"></p>
+                    <button id="lecturer_search" class="btn">Search</button>
+                </div>
+            </section>
+
+            <!-- This section contains a form for adding of student -->
+            <section class="form-add" id="form">
+                <label for="firstName">First Name: <span id="firstName"></span></label>
+                <label class="left" for="middle name">Middle Name: <span id="middleName"></span></label>
+                <label for="lastName">Last Name: <span id="lastName"></span></label><br> <br>
+        
+                <label for="faculty">Faculty: <span id="faculty"></span></label>
+                <label for="faculty">Year:
+                 <select id="year" name="faculty">
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+                </label>
+
+                <label class="left" for="department">Department: <span id="department"></span></label>
+                <label for="sex">Gender: <span id="sex"></span></label>
+                <button id="btn_submit" class="form-btn" type="submit">Clear Student</button>
+                <p id="matric_noMSG" class="matric_no"></p>
+            </section>
+
+            <section id="section3">
+                <div class="add">
+                    <input id="matric_no" type="text" name="regno" placeholder="Input Matric Number">
+                    <p id="details1" class="details1"></p>
+                    <button id="search1" class="btn">Search</button>
+                    <!-- <a href="#form" id="search"><button class="btn">Search</button></a> -->
+                </div>
+            </section>
+
+            <section class="view-form" id="form1"></section>
+
+            <!-- This section contains a form for adding of lecturer -->
+            <section class="form-add_lecturer" id="form_lecturer">
+                <label for="firstName">First Name: <span id="firstName1"></span></label>
+                <label class="left" for="middle name">Middle Name: <span id="middleName1"></span></label>
+                <label for="lastName">Last Name: <span id="lastName1"></span></label><br>        
+                <label for="faculty">Faculty: <span id="faculty1"></span></label>
+                <label class="left" for="department">Department: <span id="department1"></span></label>
+                <label for="state_of_origin">State of Origin: <span id="state_of_origin1"></span></label>
+                <label for="email">Email: <span id="email1"></span></label><br>
+                <label for="phone_no">Phone Number: <span id="phone_number1"></span></label>
+                <label for="sex">Gender: <span id="sex1"></span></label>
+                <label for="password">Password: <input type="text" id="password1" name="password"></label><br>
+                <button id="btn_submit1" class="form-btn" type="submit">Submit</button>
+                <p id="ID_msg" class="ID_msg"></p>
+            </section>
+        </div>
+    </div>
+    <script type="module" src="Dashboard.js"></script> 
+</body>
+</html>

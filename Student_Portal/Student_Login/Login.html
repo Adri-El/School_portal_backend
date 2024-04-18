@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link rel="stylesheet" href="Login.css" type="text/css">
+    <script src="https://kit.fontawesome.com/20a5eafc37.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+        <h1>Login To Your Student Portal</h1>
+            
+            <form>
+                <div class="input-group">
+                    <div class="input-field">
+                        <i class="fa-solid fa-user"></i>
+                        <input id="matric_number" type="username" placeholder="Matric Number">
+
+                    </div>
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input id="password" type="password" placeholder="Password">
+                     </div>
+                    
+                </div>
+                <a href="/Admin_Forgot_Password/forgot.html" class="forgot">Forgot Password?</a>
+                <button id="submit" class="block">Sign In</button>
+                <p class="error" id="error_paragraph"></p>
+                
+            </form>
+
+        </div>
+
+    </div>
+    <script type="module" src="Login.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer Portal</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
+</head>
+<body>
+
+    <!-- This div conains the whole content of the page -->
+    <div class="whole-content">
+
+        <!-- This tag contains whole content of the topbar -->
+        <nav class="topbar">
+            <div>
+                <input type="text" class="search-input" placeholder="Search...">
+            </div>
+            <div class="user-info">
+                <img src="/images/1x/baseline_admin_panel_settings_white_24dp.png"><span id="username">username</span>
+            </div>
+            <div class="sign-out" id="sign-out">
+                <a>
+                    <img src="/images/1x/baseline_logout_white_24dp.png"><p>Signout</p>
+                </a>   
+            </div> 
+        </nav>
+    
+        <!-- This tag contains the whole content of the sidebar -->
+        <nav class="sidebar">
+            <div class="text">
+                <img src="\images\logo.png">
+            </div>
+            <div class="main">
+                <p>Internship University</p>
+            </div>
+
+            <div class="container">
+            <ul>
+                <li><a href="#dashboard"><img src="/images/1x/baseline_dashboard_white_24dp.png"><p>Dashboard</p></a></li>
+                <li>
+                    <a href="#student" class="std_btn"><img src="/images/1x/baseline_groups_white_24dp.png"><p id="dropDown">Result
+                        <i class="fa fa-caret-down first"></i></p>
+                    </a>
+                    <ul class="std-show" id="std_drop"> 
+                        <li><a href="#section1">Upload Results</a></li>
+                        <!-- <li><a href="#section2">Edit student profile</a></li>
+                        <li><a href="#section3">View Student Profile</a></li>  
+                        <li><a href="#section4">Delete student</a></li>   -->
+                    </ul>
+                </li>
+                <!-- <li>
+                    <a href="#" class="ins-btn"><img src="/images/1x/baseline_school_white_24dp.png"><p id="dropDown1">Instance
+                        <i class="fa fa-caret-down second"></i></p>
+                    </a>
+                    <ul class="ins-show" id="ins_show"> 
+                        <li><a href="#">Add course</a></li>
+                        <li><a href="#">Drop course</a></li>  
+                        <li><a href="#">Add department</a></li>  
+                        <li><a href="#">Add program</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+            </div> 
+        </nav>
+
+        <!-- This div contain the whole content -->
+        <div class="content">
+            <section id="dashboard" class="form-box">
+                    <h1>Welcome... 
+                        <span id="username1"></span> 
+                    </h1>
+            </section>
+
+            <section id="section1">
+                <div class="add">
+                    <label for="session">Input Session: <input type="text" placeholder="Session" id="session"></label><br>
+                    <label for="department">Input Department: <input type="text" placeholder="Department" id="department"></label><br>
+                    <label for="cos_code">Input Course Code<input type="text" placeholder="Course Code" id="cos_code"></label><br>
+                </div>
+                <button id="get_student" class="get_student">Get Registered Student</button>
+            </section>
+
+            <section class="view-form" id="form1"></section>
+            
+            <div class="error-container">
+                <h1 id="error_msg">😢</h1>
+                    <p class="error-code"></p>
+                    <p><img src="/images/error_image.png" alt="Error Image"></p>
+                    <!-- <p>We couldn't find the page you were looking for.</p> -->
+                    <button class="back-button">Go Back</button>
+            </div>
+
+            <section id="get_reg_form" class="get_reg_form">
+                <h2>Result Upload</h2>
+                <table id="get_reg_student" border="1">
+                    <tr>
+                        <th>Reg NO</th>
+                        <th>CA</th>
+                        <th>Exam</th>
+                        <th>Total</th>
+                        <th>Grade</th>
+                        <th>Add</th>
+                    </tr>
+                </table>
+                <button id="submit_result" class="submit_result">Submit</button>
+            </section>
+        </div>
+    </div>
+    <script type="module" src="Dash.js"></script> 
+</body>
+</html>
