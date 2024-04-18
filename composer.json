@@ -1,0 +1,15 @@
+{
+    "name": "adriel/internship_university",
+    "description": "A simple university school portal",
+    "type": "project",
+    "authors": [
+        {
+            "name": "AdriEl Amadi",
+            "email": "adrielamadi7@gmail.com"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^6.8",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}

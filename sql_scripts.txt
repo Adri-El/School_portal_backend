@@ -1,0 +1,281 @@
+
+// script for creating admins table
+CREATE TABLE admins(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    username varchar(80) NOT null,
+    email varchar(80) NOT null,
+    password varchar(900) NOT null,
+    createdAt datetime NOT null
+);
+
+//script for inserting data into sql
+INSERT INTO admins (username, email, password, createdAt) VALUES ("noni1", "chinomsoamadi7@gmail.com", "$2y$10$wBWRY74oE2mvtTPMuja2keh9UgxqTVkUbvQ3lQFZM8avNzCidUjpa", "2023-7-3 04:53:01");
+
+
+//script for creating admitted student table
+CREATE TABLE admitted_students(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    first_name varchar(80) NOT null,
+    last_name varchar(80) NOT null,
+    middle_name varchar(80) NOT null,
+    jamb_reg_no varchar(80) NOT null,
+    year int(4) NOT null,
+    faculty varchar(100) NOT null,
+    department varchar(100) NOT null,
+    dept_code varchar(5) NOT null,
+    duration int(2) NOT null,
+    state_of_origin varchar(200) NOT null,
+    email varchar(200) NOT null,
+    phone_number varchar(200) NOT null,
+    guardian_name varchar(150) NOT null,
+    guardian_number varchar(80) NOT null,
+    sex varchar(80) NOT null
+);
+
+//script for inserting admitted admitted_students
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Obiora", "Okoro", "John", "12345678IA", "Medical science", "Medicine and surgery", "Male");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Chiamaka", "Uba", "Sandra", "59632174JC", "Social science", "Political science", "Fmale");
+INSERT INTO admitted_students (first_name, last_name, middle_name, jamb_reg_no, year, faculty, department, dept_code, duration, state_of_origin, email, phone_number, guardian_name, guardian_number, sex) VALUES ("Kunle", "Daramola", "Henry", "85479632PD", 2023, "Physical science", "Computer science", "cos", 4, "Oyo state", "kd@gmail.com", "07045678234", "Mr Daramola", "08023456765", "Male");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Hadiza", "Mustapha", "Ruby", "75315984TY", "Art", "Mass communication", "Female");
+INSERT INTO admitted_students (first_name, last_name, middle_name, reg_no, faculty, department, sex) VALUES ("Steven", "Eno", "David", "56987201JC", "Engineering", "Civil engineering", "Male");
+
+//script for creating students table
+CREATE TABLE students(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    first_name varchar(80) NOT null,
+    last_name varchar(80) NOT null,
+    middle_name varchar(80) NOT null,
+    jamb_reg_no varchar(80) NOT null,
+    matric_no varchar(80),
+    login_id varchar(80) NOT null,
+    year int(4) NOT null,
+    faculty varchar(100) NOT null,
+    department varchar(100) NOT null,
+    dept_code varchar(5) NOT null,
+    duration int(2) NOT null,
+    state_of_origin varchar(200) NOT null,
+    email varchar(200) NOT null,
+    phone_number varchar(200) NOT null,
+    guardian_name varchar(150) NOT null,
+    guardian_number varchar(80) NOT null,
+    sex varchar(80) NOT null
+    password varchar(200) NOT null
+    
+);
+
+// create reg_number_count table
+CREATE TABLE reg_number_count(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    count int(6) NOT null
+);
+
+// insert number to reg_number_count table
+INSERT INTO reg_number_count (count) VALUES (100000);
+
+//create session table
+CREATE TABLE sessions(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    user_id int(11) NOT null,
+    session varchar(80) NOT null,
+    school_fees int(2) NOT null,
+    course_reg int(2) NOT null
+);
+
+
+CREATE TABLE computer_science_year_one_fees(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    academic_hand_book int(7) NOT null,
+    caution_fee int(7) NOT null,
+    course_registration_fee int(7) NOT null,
+    departmental_dues int(7) NOT null,
+    development_fee int(7) NOT null,
+    examination_fee int(7) NOT null,
+    faculty_dues int(7) NOT null,
+    health_insurance_scheme int(7) NOT null,
+    ICT int(7) NOT null,
+    ID_card int(7) NOT null,
+    internet_access_fee int(7) NOT null,
+    lab_fee int(7) NOT null,
+    library_fee int(7) NOT null,
+    orientation_materials int(7) NOT null,
+    registration_fee int(7) NOT null,
+    sports_fee int(7) NOT null,
+    students_welfare_scheme int(7) NOT null,
+    SUG int(7) NOT null,
+    calender int(7) NOT null,
+    visual_library_access int(7) NOT null,
+    TOTAL int(8) NOT null
+
+);
+
+//insert payment value 
+INSERT INTO computer_science_year_one_fees (academic_hand_book, caution_fee, course_registration_fee, departmental_dues, development_fee, examination_fee, faculty_dues, health_insurance_scheme, ICT, ID_card, internet_access_fee, lab_fee, library_fee, orientation_materials, registration_fee, sports_fee, students_welfare_scheme, SUG, calender, visual_library_access, TOTAL) VALUES (3600, 1000, 500, 300, 20000, 5000, 500, 2000, 3700, 500, 12000, 3000, 350, 1000, 700, 1000, 500, 600, 1700, 1000, 71700);
+
+
+//computer science year 2
+CREATE TABLE year_two_fees(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    academic_hand_book int(7) NOT null,
+    caution_fee int(7) NOT null,
+    course_registration_fee int(7) NOT null,
+    departmental_dues int(7) NOT null,
+    development_fee int(7) NOT null,
+    examination_fee int(7) NOT null,
+    faculty_dues int(7) NOT null,
+    health_insurance_scheme int(7) NOT null,
+    ICT int(7) NOT null,
+    ID_card int(7) NOT null,
+    internet_access_fee int(7) NOT null,
+    lab_fee int(7) NOT null,
+    library_fee int(7) NOT null,
+    registration_fee int(7) NOT null,
+    sports_fee int(7) NOT null,
+    students_welfare_scheme int(7) NOT null,
+    SUG int(7) NOT null,
+    
+    TOTAL int(8) NOT null
+
+);
+
+INSERT INTO year_two_fees (academic_hand_book, caution_fee, course_registration_fee, departmental_dues, development_fee, examination_fee, faculty_dues, health_insurance_scheme, ICT, ID_card, internet_access_fee, lab_fee, library_fee, registration_fee, sports_fee, students_welfare_scheme, SUG, TOTAL) VALUES (3600, 1000, 500, 300, 20000, 5000, 500, 2000, 3700, 500, 6000, 3000, 350, 400, 1000, 500, 600, 71700);
+
+
+
+
+//computer science year 3
+CREATE TABLE year_three_fees(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    academic_hand_book int(7) NOT null,
+    caution_fee int(7) NOT null,
+    course_registration_fee int(7) NOT null,
+    departmental_dues int(7) NOT null,
+    development_fee int(7) NOT null,
+    examination_fee int(7) NOT null,
+    faculty_dues int(7) NOT null,
+    health_insurance_scheme int(7) NOT null,
+    ICT int(7) NOT null,
+    internet_access_fee int(7) NOT null,
+    lab_fee int(7) NOT null,
+    library_fee int(7) NOT null,
+    registration_fee int(7) NOT null,
+    sports_fee int(7) NOT null,
+    students_welfare_scheme int(7) NOT null,
+    SUG int(7) NOT null,
+    
+    TOTAL int(8) NOT null
+
+);
+
+INSERT INTO year_three_fees (academic_hand_book, caution_fee, course_registration_fee, departmental_dues, development_fee, examination_fee, faculty_dues, health_insurance_scheme, ICT, internet_access_fee, lab_fee, library_fee, registration_fee, sports_fee, students_welfare_scheme, SUG, TOTAL) VALUES (3600, 1000, 500, 300, 15000, 3000, 500, 2000, 3700, 3000, 3000, 350, 400, 1000, 500, 600, 51200);
+
+//create courses table
+
+CREATE TABLE courses(
+    id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    title varchar(80) NOT null,
+    code varchar(80) NOT null,
+    unit int(2) NOT null,
+    semester int(2) NOT null,
+    level int(3) NOT null,
+    faculty varchar(100) NOT null,
+    department varchar(100) NOT null
+);
+
+
+
+// insert courses
+//Computer science year 1, 1st semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Computer Hardware Organization", "COS 103", 3, 1, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Introduction to Computer Science for Physical Sciences", "COS 105", 2, 1, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Elementary Mathematics I", "MTH 111", 3, 1, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Elementary Mathematics II", "MTH 121", 3, 1, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("General Physics for Physical sciences I", "PHY 115", 2, 1, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Inference I", "STA 131", 2, 1, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Use of English I", "GSP 101", 2, 1, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Use of Library I", "GSP 111", 2, 1, 100, "Physical science", "Computer science");
+
+//Computer science year 1, 2nd semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Computing Practice", "COS 102", 3, 2, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Introduction to Database Systems", "COS 104", 2, 2, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Elementary Mathematics III", "MTH 122", 3, 2, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("General Physics for Physical sciences II", "PHY 116", 2, 2, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("General Physics for Physical sciences III", "PHY 118", 2, 2, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Inference II", "STA 132", 2, 2, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Statistical Computing I", "STA 172", 2, 2, 100, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Use of English II", "GSP 102", 2, 2, 100, "Physical science", "Computer science");
+
+
+//Computer science year 2, 1st semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Computer Programming", "COS 201", 2, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Introduction to Microcomputer Systems", "COS 203", 2, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Assembly Language Programming", "COS 231", 2, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Sets, Logic and Algebra", "MTH 211", 3, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Linear Algebra I", "MTH 215", 2, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Statistics for Physical Sciences and Engineering I", "STA 205", 2, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Social Sciences", "GSP 201", 2, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Logic Philosophy and Human Existence", "GSP 207", 2, 1, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Basic Electrical Engineering", "EEE 211", 3, 1, 200, "Physical science", "Computer science");
+
+
+//Computer science year 2, 2nd semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Software Engineering I", "COS 202", 3, 2, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Introduction to Digital System Design", "COS 204", 3, 2, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Data Structures", "COS 232", 2, 2, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Data and Computer Communication", "COS 242", 2, 2, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Linear Algebra II", "MTH 216", 2, 2, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Statistics for Physical Sciences and Engineering II", "STA 206", 2, 2, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Issues in Peace and Conflict Resolution Studies", "GSP 202", 2, 2, 200, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Nigerian Peoples and Cultures", "GSP 208", 2, 2, 200, "Physical science", "Computer science");
+
+
+//Computer science year 3, 1st semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Switching Algebra and Discrete Structures", "COS 311", 3, 1, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Operating Systems", "COS 331", 3, 1, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Software Engineering II", "COS 333", 2, 1, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Automata Theory and Formal Languages", "COS 335", 2, 1, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Artificial Intelligence I", "COS 337", 2, 1, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Computer Architecture", "COS 341", 3, 1, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Laboratory for Digital System Design", "COS 351", 3, 1, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Introduction to Entrepreneurship", "CED 341", 2, 1, 300, "Physical science", "Computer science");
+
+//Computer science year 3, 2nd semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Students Industrial Work Experience Scheme", "COS 382", 6, 2, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Technical SIWES Report", "COS 384", 5, 2, 300, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("SIWES Seminar", "COS 386", 4, 2, 300, "Physical science", "Computer science");
+
+
+//Computer science year 4, 1st semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Computer System Performance Evaluation", "COS 417", 2, 1, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Operations Research", "COS 419", 3, 1, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Database Design and Management", "COS 421", 3, 1, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Algorithms", "COS 431", 2, 1, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Computer Graphics and Animation", "COS 435", 2, 1, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Advanced Computer Networks", "COS 441", 3, 1, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Structured Programming", "COS 463", 3, 1, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Project Management", "COS 437", 2, 1, 400, "Physical science", "Computer science");
+
+
+//Computer science year 4, 2nd semester
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Artificial Intelligence II", "COS 438", 2, 2, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Project", "COS 490", 6, 2, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Advanced Digital Laboratory", "COS 452", 3, 2, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Business Development and Management", "COS 342", 2, 2, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Expert Systems", "COS 436", 2, 2, 400, "Physical science", "Computer science");
+INSERT INTO courses (title, code, unit, semester, level, faculty, department) VALUES ("Mobile Communication", "COS 442", 2, 2, 400, "Physical science", "Computer science");
+
+
+
+CREATE TABLE registered_courses( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT, student_id int(2) NOT null, student_dept varchar(100) NOT null, matric_no varchar(80) NOT null, session varchar(20) NOT null, semester int(2), course_id int(11) NOT null, course_dept varchar(100) NOT null, title varchar(300) NOT null, code varchar(80) NOT null, unit int(2) NOT null, CA int(3), exam int(3), total int(3), grade varchar(2))
+
+
+//create employed lecturers table
+
+CREATE TABLE employed_lecturers( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT, first_name varchar(80) NOT null, last_name varchar(80) NOT null, middle_name varchar(80) NOT null, state_of_origin varchar(100) NOT null, email varchar(100) NOT null, phone_number varchar(13) NOT null, id_no varchar(80) NOT null, faculty varchar(100) NOT null, department varchar(100) NOT null, sex varchar(80) NOT null, added int(2) )
+
+//insert employed lecturers
+INSERT INTO employed_lecturers (first_name, last_name, middle_name, state_of_origin, email, phone_number, id_no, faculty, department, sex) VALUES ("Emeka", "Okoro", "Daniel", "Imo", "ed@gmail.com", "07036543698", "12345678RF", "Physical science", "Computer science", "Male", 0)
+
+
+//create lecturers table
+
+CREATE TABLE lecturers( id int(11) NOT null PRIMARY KEY AUTO_INCREMENT, first_name varchar(80) NOT null, last_name varchar(80) NOT null, middle_name varchar(80) NOT null, state_of_origin varchar(100) NOT null, email varchar(100) NOT null, phone_number varchar(13) NOT null, password varchar(100), id_no varchar(80) NOT null, faculty varchar(100) NOT null, department varchar(100) NOT null, sex varchar(80) NOT null )
